@@ -2,11 +2,12 @@
 // Lisence : MIT
 // Randomized QuickSort In-place algorithm, very basic
 
-package net.jacoblo.lib;
+package net.jacoblo.algorithm;
 
 import java.util.ArrayList;
 
 public class QuickSort<T extends Comparable<T>> {
+	
 	public ArrayList<T> quickSort(ArrayList<T> elements) {
 		return quickSort(new Tuple(elements), 0, elements.size()).elements;
 	}

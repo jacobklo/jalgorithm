@@ -3,6 +3,8 @@ package net.jacoblo.lib;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+import net.jacoblo.algorithm.QuickSort;
+
 public class ClosetPair<T extends Comparable<T>> extends QuickSort<T>{
 	public ArrayList<T> closetPair(ArrayList<T> elements) {
 		return quickSort(elements);
