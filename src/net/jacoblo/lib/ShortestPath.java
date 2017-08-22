@@ -18,4 +18,5 @@ public class ShortestPath<T extends Point<K>, K extends Number> {
 		
 		return (ArrayList<T>) sorted;
 	}
+	
 }

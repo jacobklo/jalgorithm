@@ -34,6 +34,17 @@ public class Point<T extends Number> implements Comparable<Point<T>>{
  }
  
  @Override
+ public boolean equals(Object o) {
+   if (o != null && (o instanceof Point<?>)) {
+     if (x.equals(((Point<?>)o).x) && y.equals(((Point<?>)o).y)) {
+       return true;
+     }
+   }
+   return false;
+ }
+ 
+ 
+ @Override
  public int compareTo(Point<T> o) {
 	if (o == null) return Integer.MAX_VALUE;
 	double thisPointDistance = distanceSquare(Double.MIN_VALUE, x.doubleValue(), Double.MIN_VALUE, y.doubleValue());
