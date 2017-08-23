@@ -7,7 +7,6 @@ import net.jacoblo.data.Graph;
 import net.jacoblo.data.Point;
 import net.jacoblo.data.UndirectedGraph;
 import net.jacoblo.data.Vertex;
-import net.jacoblo.lib.ShortestPath;
 
 public class ShortestPathMain {
 	public static void main(String[] args) {
@@ -18,32 +17,8 @@ public class ShortestPathMain {
 //		ArrayList<Point<Integer>> sorted = sp.shortestPathGreedyQuickSort(points);
 //		System.out.println(sorted);
 		
-		Graph<Integer, Integer> gra = new Graph<>();
-    Vertex<Integer, Integer> v1 = new Vertex<>("v1", 0,0);
-    Vertex<Integer, Integer> v2 = new Vertex<>("v2", 2,-1);
-    Vertex<Integer, Integer> v3 = new Vertex<>("v3", 1,3);
-    Vertex<Integer, Integer> v4 = new Vertex<>("v4", 5,4);
-    Vertex<Integer, Integer> v5 = new Vertex<>("v5", 3,6);
-    Vertex<Integer, Integer> v6 = new Vertex<>("v6", 0,5);
-    
-    gra.addEdge(v1, v2, 7);
-    gra.addEdge(v1, v3, 9);
-    gra.addEdge(v1, v6, 14);
-    gra.addEdge(v2, v3, 10);
-    gra.addEdge(v2, v4, 15);
-    gra.addEdge(v3, v4, 11);
-    gra.addEdge(v3, v6, 2);
-    gra.addEdge(v4, v5, 6);
-    gra.addEdge(v5, v6, 9);
-    
-    gra.addVertex(v1);
-    gra.addVertex(v2);
-    gra.addVertex(v3);
-    gra.addVertex(v4);
-    gra.addVertex(v5);
-    gra.addVertex(v6);
-    
-    ArrayList<Vertex<Integer,Integer>> result = Dijkstra.dijkstra(gra, v1, v5);
+	  UndirectedGraph<Integer, Integer> gra = generateGraph();
+    ArrayList<Vertex<Integer,Integer>> result = Dijkstra.dijkstra(gra, gra.getVertices().get(0), gra.getVertices().get(4));
 	  System.out.println(result);
 		
 	  
@@ -78,9 +53,32 @@ public class ShortestPathMain {
 		return locations;
 	}
 	
-	public static Graph<Integer, Integer> generateGraph() {
-		
+	public static UndirectedGraph<Integer, Integer> generateGraph() {
+	  UndirectedGraph<Integer, Integer> gra = new UndirectedGraph<>();
+    Vertex<Integer, Integer> v1 = new Vertex<>("v1", 0,0);
+    Vertex<Integer, Integer> v2 = new Vertex<>("v2", 2,-1);
+    Vertex<Integer, Integer> v3 = new Vertex<>("v3", 1,3);
+    Vertex<Integer, Integer> v4 = new Vertex<>("v4", 5,4);
+    Vertex<Integer, Integer> v5 = new Vertex<>("v5", 3,6);
+    Vertex<Integer, Integer> v6 = new Vertex<>("v6", 0,5);
     
-    return null;
+    gra.addEdge(v1, v2, 7);
+    gra.addEdge(v1, v3, 9);
+    gra.addEdge(v1, v6, 14);
+    gra.addEdge(v2, v3, 10);
+    gra.addEdge(v2, v4, 15);
+    gra.addEdge(v3, v4, 11);
+    gra.addEdge(v3, v6, 2);
+    gra.addEdge(v4, v5, 6);
+    gra.addEdge(v5, v6, 9);
+    
+    gra.addVertex(v1);
+    gra.addVertex(v2);
+    gra.addVertex(v3);
+    gra.addVertex(v4);
+    gra.addVertex(v5);
+    gra.addVertex(v6);
+    
+    return gra;
 	}
 }

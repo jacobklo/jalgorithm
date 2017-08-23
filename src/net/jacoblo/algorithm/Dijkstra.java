@@ -41,8 +41,8 @@ public class Dijkstra {
 			}
 			
 			smallestEdge.visitedEdge = true;
-			smallestEdge.getToVertex().visited = true;
-			x.add(smallestEdge.getToVertex());
+			smallestEdge.getVertex(smallestVertexrightNow).visited = true;
+			x.add(smallestEdge.getVertex(smallestVertexrightNow));
 
 		}
 		return x;

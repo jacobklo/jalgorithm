@@ -4,8 +4,8 @@ package net.jacoblo.data;
 public class UndirectedGraph<T extends Number, K extends Number> extends Graph<T, K>{
   @Override
   public void addEdge(Vertex<T,K> from, Vertex<T,K> to, K edgeWeight) {
-    super.addEdge(from, to, edgeWeight);
-    Edge<T,K> edge = new Edge<T,K>(from, edgeWeight);
+    Edge<T,K> edge = new Edge<T,K>(from,to,edgeWeight);
+    from.addEdge(edge);
     to.addEdge(edge);
   }
 }
