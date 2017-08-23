@@ -22,6 +22,8 @@ public class ShortestPathMain {
 	  System.out.println(result);
 		
 	  
+	 
+	  
 	}
 	
 	public static ArrayList<Point<Integer>> convertToPoints(ArrayList<ArrayList<Integer>> locations) {
