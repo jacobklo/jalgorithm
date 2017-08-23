@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Vertex<T extends Number, K extends Number> extends Point<T> {
   private ArrayList<Edge<T,K>> edges;
   private String name;
+  public boolean visited;
+  public K currentDistance;
   
   public Vertex(String n, T x, T y) {
     this(x,y);
@@ -12,9 +14,10 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
   }
   public Vertex(T x, T y) {
     super(x, y);
+    visited = false;
     edges = new ArrayList<Edge<T,K>>();
   }
-
+  
   void addEdge(Edge<T,K> edge) {
     // TODO L expensive check
     for ( Edge<T,K> e : edges) {
@@ -43,4 +46,17 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
     return result;
   }
   
+  @Override
+  public boolean equals(Object other) {
+  	if (other != null && other instanceof Vertex<?,?>) {
+  		Vertex<?,?> o = (Vertex<?,?>) other;
+  		return o.getX().equals(getX()) && o.getY().equals(getY()) && o.name.equals(name);
+  	}
+  	return false;
+  }
+  
+  public void setVisit(boolean visit) {
+		visited = visit;
+	}
+	
 }
