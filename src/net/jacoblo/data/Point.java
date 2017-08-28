@@ -3,8 +3,8 @@ import java.util.Comparator;
 
 public class Point<T extends Number> implements Comparable<Point<T>>{
  
- private T x;
- private T y;
+ protected T x;
+ protected T y;
  
  public Point(T x, T y) {
    setX(x);

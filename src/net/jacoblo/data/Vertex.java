@@ -21,7 +21,7 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
   public void addEdge(Edge<T,K> edge) {
     // TODO L expensive check
     for ( Edge<T,K> e : edges) {
-      if (e.getToVertex().equals(edge.getToVertex())) {
+      if (e.getVertex(this).equals(edge.getVertex(this))) {
         System.out.println("Edge is set already");
         return;
       }

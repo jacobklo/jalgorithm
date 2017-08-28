@@ -20,7 +20,7 @@ public class Graph<T extends Number, K extends Number> {
 	}
 	
 	public void addEdge(Vertex<T,K> from, Vertex<T,K> to, K edgeWeight){
-	  Edge<T,K> edge = new Edge<T,K>(to,edgeWeight);
+	  Edge<T,K> edge = new Edge<T,K>(from,to,edgeWeight);
 	  from.addEdge(edge);
 	}
 	
@@ -53,7 +53,7 @@ public class Graph<T extends Number, K extends Number> {
 	    result.add(current);
 	    
 	    for(Edge<T,K> e : current.getEdges()) {
-	      Vertex<T,K> goingVertex = e.getToVertex();
+	      Vertex<T,K> goingVertex = e.getVertex(current);
 	      int goingIndex = graph.getVertices().indexOf(goingVertex);
 	      if (!visited[goingIndex]) {
 	        queue.add(goingVertex);
