@@ -3,10 +3,10 @@ package net.jacoblo.app;
 import java.util.ArrayList;
 
 import net.jacoblo.algorithm.Dijkstra;
-import net.jacoblo.data.Graph;
 import net.jacoblo.data.Point;
-import net.jacoblo.data.UndirectedGraph;
 import net.jacoblo.data.Vertex;
+import net.jacoblo.dataStructure.Graph;
+import net.jacoblo.dataStructure.UndirectedGraph;
 import net.jacoblo.lib.ShortestPath;
 
 public class ShortestPathMain {

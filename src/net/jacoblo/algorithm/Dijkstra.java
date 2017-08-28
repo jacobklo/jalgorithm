@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import net.jacoblo.data.Edge;
-import net.jacoblo.data.Graph;
 import net.jacoblo.data.Vertex;
+import net.jacoblo.dataStructure.Graph;
 
 public class Dijkstra {
 	public static <T extends Number, K extends Number> ArrayList<Vertex<T,K>> dijkstra(Graph<T,K> graph, Vertex<T,K> root, Vertex<T,K> destination) {

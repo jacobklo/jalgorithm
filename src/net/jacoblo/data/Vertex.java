@@ -18,7 +18,7 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
     edges = new ArrayList<Edge<T,K>>();
   }
   
-  void addEdge(Edge<T,K> edge) {
+  public void addEdge(Edge<T,K> edge) {
     // TODO L expensive check
     for ( Edge<T,K> e : edges) {
       if (e.getToVertex().equals(edge.getToVertex())) {

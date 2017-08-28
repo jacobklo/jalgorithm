@@ -1,7 +1,10 @@
-package net.jacoblo.data;
+package net.jacoblo.dataStructure;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import net.jacoblo.data.Edge;
+import net.jacoblo.data.Vertex;
 
 public class Graph<T extends Number, K extends Number> {
 	private ArrayList<Vertex<T,K>> vertices;
