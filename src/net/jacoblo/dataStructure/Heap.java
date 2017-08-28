@@ -9,14 +9,10 @@ import net.jacoblo.data.Tuple;
 
 public class Heap<E extends Object & Comparable<E>> extends AbstractQueue<E> {
 	private Node<E> root;
-	private int numOfItems;
 	private Tuple<Integer, Node<E>> nextMove;
 	
-	public Heap() {
-		numOfItems = 0;
-	}
+	public Heap() {}
 	
-
 	@Override
 	public boolean offer(E e) {
 		if (e == null) { return false; }
@@ -41,25 +37,66 @@ public class Heap<E extends Object & Comparable<E>> extends AbstractQueue<E> {
 		// 2. verify if the new added node is not violating heap rules, aka parent node is always smaller than all child nodes
 		Node<E> nodeNeedToSwap = newNode;
 		while (nodeNeedToSwap.compareTo(nodeNeedToSwap.getParent()) < 0) {
-			if (nextMove.y.equals(nodeNeedToSwap.getParent())) {
-				nextMove.y = nodeNeedToSwap;
-			}
-			// For root, need to renew the pointer to root
-			if (root.equals(nodeNeedToSwap.getParent())) {
-				root = nodeNeedToSwap;
-			}
+
 			Node.<E>swap(nodeNeedToSwap, nodeNeedToSwap.getParent());
+			nodeNeedToSwap = nodeNeedToSwap.getParent();
 		}
 		
-		numOfItems++;
+		// 3. update all subsizes
+		Node<E> nodeNeedToUpdate = newNode.getParent();
+		while (nodeNeedToUpdate != null ) {
+		  nodeNeedToUpdate.setSubSize(nodeNeedToUpdate.getSubSize()+1);
+		  nodeNeedToUpdate = nodeNeedToUpdate.getParent();
+		}
+		
 		return true;
 		
 	}
 
 	@Override
 	public E poll() {
-		// TODO Auto-generated method stub
-		return null;
+		// find which child has smaller value, swap it. keep swapping until the end. return
+	  if (root == null ) return null;
+	  Node<E> nodeToSwap = root;
+	  while(nodeToSwap.getLeft() != null || nodeToSwap.getRight() != null) {
+	    if (nodeToSwap.getLeft() != null && nodeToSwap.getRight() != null) { 
+	      if (nodeToSwap.getLeft().compareTo(nodeToSwap.getRight()) < 0){
+	        Node.<E>swap(nodeToSwap, nodeToSwap.getLeft());
+	        nodeToSwap = nodeToSwap.getLeft();
+	      }
+	      else {
+	        Node.<E>swap(nodeToSwap, nodeToSwap.getRight());
+          nodeToSwap = nodeToSwap.getRight();
+	      }
+	    }
+	    else if (nodeToSwap.getLeft() != null && nodeToSwap.getRight() == null) {
+	      Node.<E>swap(nodeToSwap, nodeToSwap.getLeft());
+	      nodeToSwap = nodeToSwap.getLeft();
+	    }
+	    else if (nodeToSwap.getLeft() == null && nodeToSwap.getRight() != null) {
+	      Node.<E>swap(nodeToSwap, nodeToSwap.getRight());
+	      nodeToSwap = nodeToSwap.getRight();
+	    }
+	  }
+	  // Last node, remove the root too
+	  if (nodeToSwap.equals(root)) {
+	    root = null;
+	  }
+	  // detach that node from the heap
+	  Node<E> removingNodeParent = nodeToSwap.getParent();
+	  if (removingNodeParent != null && nodeToSwap.equals(removingNodeParent.getLeft())) {
+	    removingNodeParent.setLeft(null);
+	  }
+	  else if (removingNodeParent != null && nodeToSwap.equals(removingNodeParent.getRight())){
+	    removingNodeParent.setRight(null);
+	  }
+	  // decrease all subsize
+	  while (removingNodeParent != null) {
+	    removingNodeParent.setSubSize(removingNodeParent.getSubSize()-1);
+	    removingNodeParent = removingNodeParent.getParent();
+	  }
+	  
+	  return nodeToSwap.getValue();
 	}
 
 	@Override
@@ -75,7 +112,7 @@ public class Heap<E extends Object & Comparable<E>> extends AbstractQueue<E> {
 
 	@Override
 	public int size() {
-		return numOfItems;
+		return root.getSubSize();
 	}
 	
 	@Override
@@ -119,17 +156,37 @@ public class Heap<E extends Object & Comparable<E>> extends AbstractQueue<E> {
 			return new Tuple<>(2,currentLatestPosition.getParent());
 		}
 		else if (currentLatestPosition.getParent().getRight() != null){
-			Node<E> grandParent = currentLatestPosition.getParent().getParent();
-			if (grandParent == null || grandParent.getRight().equals(currentLatestPosition)) {
-				Node<E> mostLeft = root;
-				while(mostLeft.getLeft() != null) {
-					mostLeft = mostLeft.getLeft();
-				}
-				return new Tuple<>(1,mostLeft);
-			}
-			else {
-				return new Tuple<>(1,grandParent.getRight());
-			}
+		  boolean isRightMostNode = true;
+		  Node<E> currentNode = currentLatestPosition.getParent();
+		  while(isRightMostNode && !(currentNode.equals(root))) {
+		    if (currentNode.getParent() != null && currentNode.equals(currentNode.getParent().getLeft())) {
+		      isRightMostNode = false;
+		    }
+		    currentNode = currentNode.getParent();
+		  }
+		  
+		  if (isRightMostNode) {
+		    Node<E> mostLeft = root;
+        while(mostLeft.getLeft() != null) {
+          mostLeft = mostLeft.getLeft();
+        }
+        return new Tuple<>(1,mostLeft);
+		  }
+		  else {
+		    Node<E> nextMostLeft = currentNode.getRight();
+		    // base on heap, the grandparents child right side then left grandchild should not be null, but still check
+		    while(nextMostLeft.getLeft() == null && nextMostLeft.getRight() != null) {
+		      nextMostLeft = nextMostLeft.getRight();
+		    }
+		    
+		    while(nextMostLeft.getLeft() != null) {
+		      nextMostLeft = nextMostLeft.getLeft();
+		    }
+		    
+		    return new Tuple<>(1,nextMostLeft);
+		  }
+		  
+			
 		}
 		else {
 			//SHOUDL not go here
