@@ -96,6 +96,10 @@ public class Heap<E extends Object & Comparable<E>> extends AbstractQueue<E> {
 	    removingNodeParent = removingNodeParent.getParent();
 	  }
 	  
+	  
+	  // TODO need to recalculate nextPositionToAdd!!!
+	  
+	  
 	  return nodeToSwap.getValue();
 	}
 
@@ -112,7 +116,7 @@ public class Heap<E extends Object & Comparable<E>> extends AbstractQueue<E> {
 
 	@Override
 	public int size() {
-		return root.getSubSize();
+		return ( root == null ? 0 : root.getSubSize());
 	}
 	
 	@Override
@@ -129,12 +133,14 @@ public class Heap<E extends Object & Comparable<E>> extends AbstractQueue<E> {
 				currentLevel = current.x;
 			}
 			
-			result += current.y.toString() + " ";
-			if (current.y.getLeft() != null) {
-				list.add(new Tuple<>(currentLevel+1, current.y.getLeft()));
-			}
-			if (current.y.getRight() != null) {
-				list.add(new Tuple<>(currentLevel+1, current.y.getRight()));
+			if (current.y != null) {
+			  result += current.y.toString() + " ";
+	      if (current.y.getLeft() != null) {
+	        list.add(new Tuple<>(currentLevel+1, current.y.getLeft()));
+	      }
+	      if (current.y.getRight() != null) {
+	        list.add(new Tuple<>(currentLevel+1, current.y.getRight()));
+	      }
 			}
 		}
 		return result;
