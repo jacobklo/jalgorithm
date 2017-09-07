@@ -11,8 +11,11 @@ public class HashtableMain {
 //		hashs.put(17, 17);
 //		hashs.put(18, 18);
 //		hashs.remove(6);
-		for (int i = 0 , j = 0; i < 10 ; i++, j=j+10) {
-			hashs.put(j,j);
+		for (int i = 0 ; i < 100 ; i++) {
+			hashs.put(i,i);
+		}
+		for (int i = 0 ; i < 99 ; i++) {
+		  hashs.remove(i);
 		}
 		System.out.println(hashs);
 	}

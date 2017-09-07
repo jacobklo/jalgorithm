@@ -70,6 +70,7 @@ public class Hashtable<K,V>
   public V put(K key, V value) {
   	if (key == null || value == null) return null;
   	if (numOfItems + 1 >= capacity)	return null;
+  	numOfItems++;
     return (V) put(table, new SimpleEntry(key, value));
   }
   
@@ -80,7 +81,6 @@ public class Hashtable<K,V>
   		indexToAdd = indexToAdd % capacity;
   	}
   	table[indexToAdd] = me;
-  	numOfItems++;
   	checkIfRehash();
   	return me.getValue();
   }
@@ -107,7 +107,7 @@ public class Hashtable<K,V>
   }
   
   private void checkIfRehash() {
-  	if (numOfItems * 2 > capacity) {
+  	if (numOfItems * 1.5 > capacity) {
   		rehash();
   	}
   }
@@ -115,10 +115,12 @@ public class Hashtable<K,V>
   public void rehash() {
   	capacity = Prime.nextPrime(capacity*2);
   	Object[] newTable = new Object[capacity];
+  	numOfItems = 0;
   	for (int i = 0 ; i < table.length ; i++) {
   		if (table[i] != null) {
   			Map.Entry<K,V> me = (Map.Entry<K,V> ) table[i];
   			put(newTable, me);
+  			numOfItems++;
   		}
   	}
   	table = newTable;
@@ -138,6 +140,9 @@ public class Hashtable<K,V>
     	else {
     		Map.Entry<K,V> me = (Map.Entry<K,V> ) table[i];
       	result += me.getValue()  + " ";
+    	}
+    	if (i % 10 == 0 && i > 0) {
+    	  result += "\n";
     	}
     }
     result += "]";
