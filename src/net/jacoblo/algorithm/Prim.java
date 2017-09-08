@@ -27,10 +27,10 @@ public class Prim {
 		// base case, finish when all vertex is included
 		while(arrVertices.size() < graph.size()) {
 			// For All edges in the frontier Vertices, which one is the smallest. O( m + n ), as we visit all Vertices and Edges only once
-			Edge<P,W> smallestEdgeSoFar = null;
+			Edge<Vertex<P,W>,W> smallestEdgeSoFar = null;
 			int smallestEdgefromPointer = -1;
 			for (int i = 0 ; i < arrVertices.size() ; i++) {
-				for (Edge<P,W> e : arrVertices.get(i).getEdges()) {
+				for (Edge<Vertex<P,W>,W> e : arrVertices.get(i).getEdges()) {
 					// Skip, visit this edge already
 					if (e.visitedEdge) {
 						continue;
@@ -53,7 +53,7 @@ public class Prim {
 						smallestEdgeSoFar.getVertex(arrVertices.get(smallestEdgefromPointer)).getX(), 
 						smallestEdgeSoFar.getVertex(arrVertices.get(smallestEdgefromPointer)).getY());
 				Vertex<P,W> current = resultVertices.get(smallestEdgefromPointer);
-				Edge<P,W> currentToNewV = new Edge<P,W>(current, newV, smallestEdgeSoFar.getWeight());
+				Edge<Vertex<P,W>,W> currentToNewV = new Edge<Vertex<P,W>,W>(current, newV, smallestEdgeSoFar.getWeight());
 				current.addEdge(currentToNewV);
 				newV.addEdge(currentToNewV);
 				

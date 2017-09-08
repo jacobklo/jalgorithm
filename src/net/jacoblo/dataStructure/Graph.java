@@ -21,7 +21,7 @@ public class Graph<T extends Number, K extends Number> implements Iterable<Verte
 	}
 	
 	public void addEdge(Vertex<T,K> from, Vertex<T,K> to, K edgeWeight){
-	  Edge<T,K> edge = new Edge<T,K>(from,to,edgeWeight);
+	  Edge<Vertex<T,K>,K> edge = new Edge<Vertex<T,K>,K>(from,to,edgeWeight);
 	  from.addEdge(edge);
 	}
 	
@@ -38,7 +38,7 @@ public class Graph<T extends Number, K extends Number> implements Iterable<Verte
 		if (vertices == null || vertices.size() <= 0) 	return;
 		for (Vertex<T,K> v : vertices) {
 			v.visited = false;
-			for (Edge<T,K> e : v.getEdges()) {
+			for (Edge<Vertex<T,K>,K> e : v.getEdges()) {
 				e.visitedEdge = false;
 			}
 		}
@@ -72,7 +72,7 @@ public class Graph<T extends Number, K extends Number> implements Iterable<Verte
 	    
 	    result.add(current);
 	    
-	    for(Edge<T,K> e : current.getEdges()) {
+	    for(Edge<Vertex<T,K>,K> e : current.getEdges()) {
 	      Vertex<T,K> goingVertex = e.getVertex(current);
 	      int goingIndex = graph.getVertices().indexOf(goingVertex);
 	      if (!visited[goingIndex]) {

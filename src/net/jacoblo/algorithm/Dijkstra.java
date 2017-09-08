@@ -25,10 +25,10 @@ public class Dijkstra {
 			}
 			
 			// need to re-scan all un-visited edges from visited area X to un-visit Vertices
-			Edge<T,K> smallestEdge = null;
+			Edge<Vertex<T,K>,K> smallestEdge = null;
 			Vertex<T,K> smallestVertexrightNow = null;
 			for (Vertex<T,K> currentX : x) {
-				for (Edge<T,K> currentEdge : currentX.getEdges()) {
+				for (Edge<Vertex<T,K>,K> currentEdge : currentX.getEdges()) {
 					if (!currentEdge.visitedEdge) {
 						if (smallestEdge == null || smallestEdge.compareTo(currentEdge) > 0) {
 							smallestVertexrightNow = currentX;

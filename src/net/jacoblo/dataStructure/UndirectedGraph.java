@@ -7,7 +7,7 @@ import net.jacoblo.data.Vertex;
 public class UndirectedGraph<T extends Number, K extends Number> extends Graph<T, K>{
   @Override
   public void addEdge(Vertex<T,K> from, Vertex<T,K> to, K edgeWeight) {
-    Edge<T,K> edge = new Edge<T,K>(from,to,edgeWeight);
+    Edge<Vertex<T,K>,K> edge = new Edge<Vertex<T,K>,K>(from,to,edgeWeight);
     from.addEdge(edge);
     to.addEdge(edge);
   }

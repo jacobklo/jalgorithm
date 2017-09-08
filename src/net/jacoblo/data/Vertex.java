@@ -3,11 +3,11 @@ package net.jacoblo.data;
 import java.util.ArrayList;
 
 public class Vertex<T extends Number, K extends Number> extends Point<T> {
-  private ArrayList<Edge<T,K>> edges;
+  private ArrayList<Edge<Vertex<T,K>,K>> edges;
   public String name;
   public boolean visited;
   public K currentDistance;
-  
+
   public Vertex(String n, T x, T y) {
     this(x,y);
     name = n;
@@ -15,12 +15,12 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
   public Vertex(T x, T y) {
     super(x, y);
     visited = false;
-    edges = new ArrayList<Edge<T,K>>();
+    edges = new ArrayList<Edge<Vertex<T,K>,K>>();
   }
   
-  public void addEdge(Edge<T,K> edge) {
+  public void addEdge(Edge<Vertex<T,K>,K> edge) {
     // TODO L expensive check
-    for ( Edge<T,K> e : edges) {
+    for ( Edge<Vertex<T,K>,K> e : edges) {
       if (e.getVertex(this).equals(edge.getVertex(this))) {
         System.out.println("Edge is set already");
         return;
@@ -29,7 +29,7 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
     edges.add(edge);
   }
   
-  public ArrayList<Edge<T,K>> getEdges() { return edges; }
+  public ArrayList<Edge<Vertex<T,K>,K>> getEdges() { return edges; }
   
   @Override
   public String toString() {
@@ -40,7 +40,7 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
     else {
       result = name;
     }
-    for ( Edge<T,K> e : edges ) {
+    for ( Edge<Vertex<T,K>,K> e : edges ) {
       result += e.toString() + ",, ";
     }
     return result;

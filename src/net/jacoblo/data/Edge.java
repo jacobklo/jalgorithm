@@ -2,13 +2,13 @@ package net.jacoblo.data;
 
 import net.jacoblo.data.Vertex;
 
-public class Edge<T extends Number, K extends Number> implements Comparable<Edge<T,K>>{
+public class Edge<V extends Vertex<?,?>,K extends Number> implements Comparable<Edge<V,K>>{
   protected K weight;
-  protected Vertex<T,K> from;
-  protected Vertex<T,K> to;
+  protected V from;
+  protected V to;
   public boolean visitedEdge;
   
-  public Edge(Vertex<T,K> f, Vertex<T,K> t, K w) {
+  public Edge(V f, V t, K w) {
     setWeight(w);
     setToVertex(t);
     setFromVertex(f);
@@ -18,14 +18,14 @@ public class Edge<T extends Number, K extends Number> implements Comparable<Edge
   @Override
   public String toString() {
     String result = (from.name == null ? "" : from.name);
-    result += " ( " + from.getX() + ", " + from.getY() + " ) "  + "--" + weight + "-> ";
+    result += " ( " + ((Vertex<?,?>)from).getX() + ", " + from.getY() + " ) "  + "--" + weight + "-> ";
     result += (to.name == null ? "" : to.name);
     result += " ( " + to.getX() + ", " + to.getY() + " ) ";
     return result;
   }
   
   // If vertex is from "from", then return to, if it is from "to", return "from"
-  public Vertex<T,K> getVertex(Vertex<T,K> fromWhere) {
+  public V getVertex(V fromWhere) {
     if (fromWhere.equals(getFromVertex())) {
       return getToVertex();
     }
@@ -34,16 +34,16 @@ public class Edge<T extends Number, K extends Number> implements Comparable<Edge
     }
     return null;
   }
-  private Vertex<T,K> getToVertex() { return to; }
-  private Vertex<T,K> getFromVertex() { return from; }
+  private V getToVertex() { return to; }
+  private V getFromVertex() { return from; }
   public K getWeight() { return weight; }
-  public void setToVertex(Vertex<T,K> t) { to = t; }
-  public void setFromVertex(Vertex<T,K> f) { from = f; }
+  public void setToVertex(V t) { to = t; }
+  public void setFromVertex(V f) { from = f; }
   public void setWeight(K w) { weight = w; }
 
 	@Override
-	public int compareTo(Edge<T, K> o) {
-		return (int) (weight.doubleValue() - o.getWeight().doubleValue());
+	public int compareTo(Edge<V, K> o) {
+		return (int) (((Number) weight).doubleValue() - o.getWeight().doubleValue());
 	}
 	
 }
