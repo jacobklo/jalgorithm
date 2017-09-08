@@ -1,12 +1,13 @@
 package net.jacoblo.dataStructure;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import net.jacoblo.data.Edge;
 import net.jacoblo.data.Vertex;
 
-public class Graph<T extends Number, K extends Number> {
+public class Graph<T extends Number, K extends Number> implements Iterable<Vertex<T,K>>{
 	private ArrayList<Vertex<T,K>> vertices;
 	
 	public Graph() {
@@ -31,6 +32,25 @@ public class Graph<T extends Number, K extends Number> {
 	    result += "V : " + v.toString() + "\n";
 	  }
 	  return result;
+	}
+	
+	public void resetVisit() {
+		if (vertices == null || vertices.size() <= 0) 	return;
+		for (Vertex<T,K> v : vertices) {
+			v.visited = false;
+			for (Edge<T,K> e : v.getEdges()) {
+				e.visitedEdge = false;
+			}
+		}
+	}
+	
+	public Vertex<T,K> getRandomVertex() {
+		if (vertices == null || vertices.size() <= 0) return null;
+		return vertices.get((int)(Math.random() * vertices.size()));
+	}
+	
+	public int size() {
+		return ( vertices == null ? 0 : vertices.size());
 	}
 	
 	//weight is not calculated!
@@ -62,5 +82,10 @@ public class Graph<T extends Number, K extends Number> {
 	  }
 	  
 	  return result;
+	}
+
+	@Override
+	public Iterator<Vertex<T, K>> iterator() {
+		return vertices.iterator();
 	}
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Vertex<T extends Number, K extends Number> extends Point<T> {
   private ArrayList<Edge<T,K>> edges;
-  private String name;
+  public String name;
   public boolean visited;
   public K currentDistance;
   
@@ -40,9 +40,9 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
     else {
       result = name;
     }
-//    for ( Edge<T,K> e : edges ) {
-//      result += e.toString() + ",, ";
-//    }
+    for ( Edge<T,K> e : edges ) {
+      result += e.toString() + ",, ";
+    }
     return result;
   }
   
@@ -50,7 +50,7 @@ public class Vertex<T extends Number, K extends Number> extends Point<T> {
   public boolean equals(Object other) {
   	if (other != null && other instanceof Vertex<?,?>) {
   		Vertex<?,?> o = (Vertex<?,?>) other;
-  		return o.getX().equals(getX()) && o.getY().equals(getY()) && o.name.equals(name);
+  		return o.getX().equals(getX()) && o.getY().equals(getY()) && (name == null ? true : name.equals(o.name));
   	}
   	return false;
   }

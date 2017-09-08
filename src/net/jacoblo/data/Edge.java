@@ -17,7 +17,11 @@ public class Edge<T extends Number, K extends Number> implements Comparable<Edge
   
   @Override
   public String toString() {
-    return " ( " + from.getX() + ", " + from.getY() + " ) "  + "--" + weight + "-> ( " + to.getX() + ", " + to.getY() + " ) ";
+    String result = (from.name == null ? "" : from.name);
+    result += " ( " + from.getX() + ", " + from.getY() + " ) "  + "--" + weight + "-> ";
+    result += (to.name == null ? "" : to.name);
+    result += " ( " + to.getX() + ", " + to.getY() + " ) ";
+    return result;
   }
   
   // If vertex is from "from", then return to, if it is from "to", return "from"

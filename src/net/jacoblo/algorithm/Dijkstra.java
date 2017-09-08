@@ -11,6 +11,8 @@ public class Dijkstra {
 	public static <T extends Number, K extends Number> ArrayList<Vertex<T,K>> dijkstra(Graph<T,K> graph, Vertex<T,K> root, Vertex<T,K> destination) {
 		if (graph == null || root == null || destination == null)	return new ArrayList<Vertex<T,K>>();
 		
+		graph.resetVisit();
+		
 		ArrayList<Vertex<T,K>> x = new ArrayList<Vertex<T,K>>();
 		x.add(root);
 		
