@@ -3,17 +3,17 @@ package net.jacoblo.algorithm;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import net.jacoblo.data.Edge;
-import net.jacoblo.data.Vertex;
+import net.jacoblo.data.Edge.BasicEdge;
+import net.jacoblo.data.Vertex.BasicVertex;
 import net.jacoblo.dataStructure.Graph;
 
 public class Dijkstra {
-	public static <T extends Number, K extends Number> ArrayList<Vertex<T,K>> dijkstra(Graph<T,K> graph, Vertex<T,K> root, Vertex<T,K> destination) {
-		if (graph == null || root == null || destination == null)	return new ArrayList<Vertex<T,K>>();
+	public static <T extends Number, K extends Number> ArrayList<BasicVertex<T,K>> dijkstra(Graph<T,K> graph, BasicVertex<T,K> root, BasicVertex<T,K> destination) {
+		if (graph == null || root == null || destination == null)	return new ArrayList<BasicVertex<T,K>>();
 		
 		graph.resetVisit();
 		
-		ArrayList<Vertex<T,K>> x = new ArrayList<Vertex<T,K>>();
+		ArrayList<BasicVertex<T,K>> x = new ArrayList<BasicVertex<T,K>>();
 		x.add(root);
 		
 		while (x.size() < graph.getVertices().size() && x.size() > 0) {
@@ -25,10 +25,10 @@ public class Dijkstra {
 			}
 			
 			// need to re-scan all un-visited edges from visited area X to un-visit Vertices
-			Edge<Vertex<T,K>,K> smallestEdge = null;
-			Vertex<T,K> smallestVertexrightNow = null;
-			for (Vertex<T,K> currentX : x) {
-				for (Edge<Vertex<T,K>,K> currentEdge : currentX.getEdges()) {
+			BasicEdge<BasicVertex<T,K>,K> smallestEdge = null;
+			BasicVertex<T,K> smallestVertexrightNow = null;
+			for (BasicVertex<T,K> currentX : x) {
+				for (BasicEdge<BasicVertex<T,K>,K> currentEdge : currentX.getEdges()) {
 					if (!currentEdge.visitedEdge) {
 						if (smallestEdge == null || smallestEdge.compareTo(currentEdge) > 0) {
 							smallestVertexrightNow = currentX;

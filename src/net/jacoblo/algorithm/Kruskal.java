@@ -2,8 +2,9 @@ package net.jacoblo.algorithm;
 
 import java.util.PriorityQueue;
 
-import net.jacoblo.data.Edge;
-import net.jacoblo.data.Vertex;
+import net.jacoblo.data.UnionFindVertex;
+import net.jacoblo.data.Edge.BasicEdge;
+import net.jacoblo.data.Vertex.BasicVertex;
 import net.jacoblo.dataStructure.UndirectedGraph;
 
 public class Kruskal {
@@ -12,10 +13,10 @@ public class Kruskal {
     graph.resetVisit();
     
     // sort the Edges
-    PriorityQueue<Edge<P,W>> edges = new PriorityQueue<>();
+    PriorityQueue<BasicEdge<BasicVertex<P,W>,W>> edges = new PriorityQueue<>();
     
-    for (Vertex<P,W> v : graph.getVertices()) {
-      for (Edge<P,W> e : v.getEdges()) {
+    for (BasicVertex<P,W> v : graph.getVertices()) {
+      for (BasicEdge<BasicVertex<P,W>,W> e : v.getEdges()) {
         if (!e.visitedEdge) {
           edges.add(e);
           e.visitedEdge = true;
@@ -24,8 +25,21 @@ public class Kruskal {
     }
     // for each edge, check if cyclic with current, if not add edge
     while (edges.size() > 0) {
-      Edge<P,W> currentEdge = edges.poll();
+      BasicEdge<P,W> currentEdge = edges.poll();
       
     }
+  }
+  
+  public static <P extends Number, W extends Number> UnionFindVertex<P,W> generateUnionFindVertex(BasicVertex<P,W> v) {
+  	if (v == null) return null;
+  	UnionFindVertex<P,W> result = new UnionFindVertex<>(v.name, v.getX(), v.getY());
+  	return result;
+  }
+  
+  public static <P extends Number, W extends Number> BasicEdge<UnionFindVertex<P,W>,W> generateUnionFindEdge(BasicEdge<BasicVertex<P,W>,W> e)  {
+  	if (e == null) return null;
+  	UnionFindVertex<P,W> from = generateUnionFindVertex(e.getFromVertex());
+  	
+  	
   }
 }

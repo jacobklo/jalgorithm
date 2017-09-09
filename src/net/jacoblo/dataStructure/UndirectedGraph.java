@@ -1,14 +1,21 @@
 package net.jacoblo.dataStructure;
 
-import net.jacoblo.data.Edge;
-import net.jacoblo.data.Vertex;
+import net.jacoblo.data.Edge.BasicEdge;
+import net.jacoblo.data.Edge.Edgeable;
+import net.jacoblo.data.Vertex.BasicVertex;
+import net.jacoblo.data.Vertex.Vertexable;
 
 //TODO : Try to simplify the double initization of edges in undirected graph
-public class UndirectedGraph<T extends Number, K extends Number> extends Graph<T, K>{
-  @Override
-  public void addEdge(Vertex<T,K> from, Vertex<T,K> to, K edgeWeight) {
-    Edge<Vertex<T,K>,K> edge = new Edge<Vertex<T,K>,K>(from,to,edgeWeight);
-    from.addEdge(edge);
-    to.addEdge(edge);
-  }
+public class UndirectedGraph<V extends Vertexable, E extends Edgeable> extends Graph<V,E>{
+  
+	public static <V extends Vertexable, K extends Number> void addEdge(V from, V to, K edgeWeight){
+		if (from == null || to == null || edgeWeight == null) return;
+		if (!(from.getVertexType().equals(to.getVertexType()))) return;
+		
+		if (from.getVertexType().equals("BasicVertex")) {
+			BasicEdge<K> edge = new BasicEdge<K>(from,to,edgeWeight);
+			from.addEdge(edge);
+			to.addEdge(edge);
+		}
+	}
 }
