@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import net.jacoblo.data.Edge.BasicEdge;
 import net.jacoblo.data.Edge.Edgeable;
+import net.jacoblo.data.Edge.VisitEdge;
 import net.jacoblo.data.Vertex.BasicVertex;
 import net.jacoblo.data.Vertex.Vertexable;
 
@@ -30,6 +31,10 @@ public class Graph<V extends Vertexable, E extends Edgeable> implements Iterable
 			BasicEdge<K> edge = new BasicEdge<K>(from,to,edgeWeight);
 			from.addEdge(edge);
 		}
+		else if (from.getVertexType().equals("VisitVertex")) {
+			VisitEdge<K> edge = new VisitEdge<K>(from,to,edgeWeight);
+			from.addEdge(edge);
+		}
 	}
 	
 	@Override
@@ -44,16 +49,6 @@ public class Graph<V extends Vertexable, E extends Edgeable> implements Iterable
 	  }
 	  return result;
 	}
-	
-//	public void resetVisit() {
-//		if (vertices == null || vertices.size() <= 0) 	return;
-//		for (V v : vertices) {
-//			v.visited = false;
-//			for (BasicEdge<BasicVertex<T,K>,K> e : v.getEdges()) {
-//				e.visitedEdge = false;
-//			}
-//		}
-//	}
 	
 	public V getRandomVertex() {
 		if (vertices == null || vertices.size() <= 0) return null;

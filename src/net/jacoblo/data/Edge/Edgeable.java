@@ -3,6 +3,7 @@ package net.jacoblo.data.Edge;
 import net.jacoblo.data.Vertex.Vertexable;
 
 public interface Edgeable {
+	public String getEdgeType();
 	public Vertexable getVertex(Vertexable fromWhere);
 	public Vertexable getFromVertex();
 	public Vertexable getToVertex();

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import net.jacoblo.algorithm.Dijkstra;
 import net.jacoblo.data.Point;
 import net.jacoblo.data.Edge.BasicEdge;
+import net.jacoblo.data.Edge.VisitEdge;
 import net.jacoblo.data.Vertex.BasicVertex;
+import net.jacoblo.data.Vertex.VisitVertex;
 import net.jacoblo.dataStructure.UndirectedGraph;
 
 
@@ -18,8 +20,8 @@ public class ShortestPathMain {
 //		ArrayList<Point<Integer>> sorted = sp.shortestPathGreedyQuickSort(points);
 //		System.out.println(sorted);
 		
-	  UndirectedGraph<Integer, Integer> gra = generateGraph();
-    ArrayList<BasicVertex<Integer,Integer>> result = Dijkstra.dijkstra(gra, gra.getVertices().get(0), gra.getVertices().get(4));
+		UndirectedGraph<VisitVertex<Integer>, VisitEdge<Integer>> gra = generateGraph();
+    ArrayList<VisitVertex<Integer>> result = Dijkstra.dijkstra(gra, gra.getVertices().get(0), gra.getVertices().get(4));
 	  System.out.println(result);
 		
 	  
@@ -56,14 +58,14 @@ public class ShortestPathMain {
 		return locations;
 	}
 	
-	public static UndirectedGraph<BasicVertex<Integer>, BasicEdge<Integer>> generateGraph() {
-		UndirectedGraph<BasicVertex<Integer>, BasicEdge<Integer>> gra = new UndirectedGraph<>();
-    BasicVertex<Integer> v1 = new BasicVertex<>("v1", 0,0);
-    BasicVertex<Integer> v2 = new BasicVertex<>("v2", 2,-1);
-    BasicVertex<Integer> v3 = new BasicVertex<>("v3", 1,3);
-    BasicVertex<Integer> v4 = new BasicVertex<>("v4", 5,4);
-    BasicVertex<Integer> v5 = new BasicVertex<>("v5", 3,6);
-    BasicVertex<Integer> v6 = new BasicVertex<>("v6", 0,5);
+	public static UndirectedGraph<VisitVertex<Integer>, VisitEdge<Integer>> generateGraph() {
+		UndirectedGraph<VisitVertex<Integer>, VisitEdge<Integer>> gra = new UndirectedGraph<>();
+		VisitVertex<Integer> v1 = new VisitVertex<>("v1", 0,0);
+		VisitVertex<Integer> v2 = new VisitVertex<>("v2", 2,-1);
+		VisitVertex<Integer> v3 = new VisitVertex<>("v3", 1,3);
+		VisitVertex<Integer> v4 = new VisitVertex<>("v4", 5,4);
+		VisitVertex<Integer> v5 = new VisitVertex<>("v5", 3,6);
+		VisitVertex<Integer> v6 = new VisitVertex<>("v6", 0,5);
     
     UndirectedGraph.addEdge(v1, v2, 7);
     UndirectedGraph.addEdge(v1, v3, 9);

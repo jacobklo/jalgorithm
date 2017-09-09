@@ -3,17 +3,20 @@ package net.jacoblo.data.Edge;
 import net.jacoblo.data.Vertex.Vertexable;
 
 public class BasicEdge<K extends Number> 
-	implements Edgeable,Comparable<BasicEdge<K>>{
+	implements Edgeable,Comparable<Edgeable>{
+	private final String EDGE_TYPE = "BasicEdge";
   protected K weight;
   protected Vertexable from;
   protected Vertexable to;
-  public boolean visitedEdge;
   
   public BasicEdge(Vertexable f, Vertexable t, K w) {
     setWeight(w);
     setToVertex(t);
     setFromVertex(f);
-    visitedEdge = false;
+  }
+  
+  public String getEdgeType() {
+  	return EDGE_TYPE;
   }
   
   @Override
@@ -50,7 +53,7 @@ public class BasicEdge<K extends Number>
   public void setWeight(Number w) { weight = (K)w; }
 
 	@Override
-	public int compareTo(BasicEdge<K> o) {
+	public int compareTo(Edgeable o) {
 		return (int) (((Number) weight).doubleValue() - o.getWeight().doubleValue());
 	}
 	
