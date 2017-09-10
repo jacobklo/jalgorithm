@@ -1,6 +1,9 @@
 package net.jacoblo.data;
 
+import java.util.ArrayList;
+
 public interface UnionFindable {
-	public UnionFindable find(UnionFindable current);
-	public UnionFindable union(UnionFindable group1, UnionFindable group2);
+	public UnionFindable getLeader();
+	public boolean setLeader(UnionFindable newLeader);
+	public ArrayList<UnionFindable> getChildren();
 }

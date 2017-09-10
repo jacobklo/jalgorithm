@@ -1,32 +1,65 @@
 package net.jacoblo.app;
 
+import net.jacoblo.algorithm.Kruskal;
 import net.jacoblo.algorithm.Prim;
 import net.jacoblo.data.UnionFindVertex;
 import net.jacoblo.data.Edge.VisitEdge;
 import net.jacoblo.data.Vertex.BasicVertex;
 import net.jacoblo.data.Vertex.VisitVertex;
 import net.jacoblo.dataStructure.UndirectedGraph;
+import net.jacoblo.dataStructure.UnionFind;
 
 public class MinimumSpanningTreeMain {
 	public static void main(String[] args) {
-		testPrimsAlgorithm();
+		// testPrimsAlgorithm();
 		
-//		UnionFindVertex<Integer,Integer> au = new UnionFindVertex("a",0,0);
-//		UnionFindVertex<Integer,Integer> bu = new UnionFindVertex("b",0,1);
-//		UnionFindVertex<Integer,Integer> cu = new UnionFindVertex("c",1,1);
-//		UnionFindVertex<Integer,Integer> du = new UnionFindVertex("d",1,0);
-//		UnionFindVertex<Integer,Integer> eu = new UnionFindVertex("e",2,2);
-//
-//		au.union(au, bu);
-//		bu.union(cu, du);
-//		au.union(au, eu);
-//		cu.union(au, cu);
-//		
-//	  System.out.println(au);
-//	  System.out.println(bu);
-//	  System.out.println(cu);
-//	  System.out.println(du);
-//	  System.out.println(eu);
+		// testUnionFind();
+		
+		testKruskal();
+	}
+	
+	public static void testKruskal() {
+		UndirectedGraph<UnionFindVertex<Integer>, VisitEdge<Integer>> graph = new UndirectedGraph<>();
+		UnionFindVertex<Integer> a = new UnionFindVertex<>("a",0,0);
+		UnionFindVertex<Integer> b = new UnionFindVertex<>("b",0,1);
+		UnionFindVertex<Integer> c = new UnionFindVertex<>("c",1,1);
+		UnionFindVertex<Integer> d = new UnionFindVertex<>("d",1,0);
+		
+		UndirectedGraph.addEdge(a, b, 4);
+		UndirectedGraph.addEdge(b, c, 1);
+		UndirectedGraph.addEdge(c, d, 2);
+		UndirectedGraph.addEdge(a, d, 5);
+		UndirectedGraph.addEdge(b, d, 3);
+		
+		graph.addVertex(a);
+		graph.addVertex(b);
+		graph.addVertex(c);
+		graph.addVertex(d);
+		
+		UndirectedGraph<UnionFindVertex<Integer>, VisitEdge<Integer>> result = Kruskal.kruskal(graph);
+		System.out.println(result);
+	}
+	
+	public static void testUnionFind() {
+		UnionFindVertex<Integer> au = new UnionFindVertex("a",0,0);
+		UnionFindVertex<Integer> bu = new UnionFindVertex("b",0,1);
+		UnionFindVertex<Integer> cu = new UnionFindVertex("c",1,1);
+		UnionFindVertex<Integer> du = new UnionFindVertex("d",1,0);
+		UnionFindVertex<Integer> eu = new UnionFindVertex("e",2,2);
+
+		UnionFind.union(au, bu);
+		UnionFind.union(cu, du);
+		UnionFind.union(au, eu);
+		UnionFind.union(au, cu);
+		
+		System.out.println(au.equals(bu));
+		
+		
+	  System.out.println(au);
+	  System.out.println(bu);
+	  System.out.println(cu);
+	  System.out.println(du);
+	  System.out.println(eu);
 	}
 	
 	public static void testPrimsAlgorithm() {

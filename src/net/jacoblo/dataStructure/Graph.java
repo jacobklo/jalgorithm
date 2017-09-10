@@ -31,7 +31,7 @@ public class Graph<V extends Vertexable, E extends Edgeable> implements Iterable
 			BasicEdge<K> edge = new BasicEdge<K>(from,to,edgeWeight);
 			from.addEdge(edge);
 		}
-		else if (from.getVertexType().equals("VisitVertex")) {
+		else if (from.getVertexType().equals("VisitVertex") || from.getVertexType().equals("UnionFindVertex")) {
 			VisitEdge<K> edge = new VisitEdge<K>(from,to,edgeWeight);
 			from.addEdge(edge);
 		}
@@ -63,4 +63,5 @@ public class Graph<V extends Vertexable, E extends Edgeable> implements Iterable
 	public Iterator<V> iterator() {
 		return vertices.iterator();
 	}
+
 }

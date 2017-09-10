@@ -63,4 +63,5 @@ public class BasicVertex<T extends Number> extends Point<T> implements Vertexabl
   	}
   	return false;
   }
+  
 }

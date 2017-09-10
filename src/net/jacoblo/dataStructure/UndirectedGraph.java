@@ -17,7 +17,7 @@ public class UndirectedGraph<V extends Vertexable, E extends Edgeable> extends G
 			from.addEdge(edge);
 			to.addEdge(edge);
 		}
-		else if (from.getVertexType().equals("VisitVertex")) {
+		else if (from.getVertexType().equals("VisitVertex") || from.getVertexType().equals("UnionFindVertex")) {
 			VisitEdge<K> edge = new VisitEdge<K>(from,to,edgeWeight);
 			from.addEdge(edge);
 			to.addEdge(edge);
