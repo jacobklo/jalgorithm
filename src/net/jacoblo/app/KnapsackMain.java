@@ -12,12 +12,12 @@ public class KnapsackMain {
     KnapsackItem k3 = new KnapsackItem("k3", 4,2);
     KnapsackItem k4 = new KnapsackItem("k4", 4,3);
     ArrayList<KnapsackItem> items = new ArrayList<>();
-    items.add(k1);
-    items.add(k2);
     items.add(k3);
     items.add(k4);
+    items.add(k2);
+    items.add(k1);
     
-    double resultValue = Knapsack.knapsack(items, 6);
+    ArrayList<KnapsackItem> resultValue = Knapsack.knapsack(items, 6);
     System.out.println(resultValue);
   }
 }
