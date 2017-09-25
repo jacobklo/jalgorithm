@@ -12,4 +12,16 @@ public class Util {
 		}
 		return current;
 	}
+	
+	public static <T extends Number> T min(T... inputs) {
+    double result = inputs[0].doubleValue();
+    T current = inputs[0];
+    for (T i : inputs) {
+      if (result > i.doubleValue()) {
+        result = i.doubleValue();
+        current = i;
+      }
+    }
+    return current;
+  }
 }
