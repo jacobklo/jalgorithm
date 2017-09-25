@@ -1,5 +1,7 @@
 package net.jacoblo.algorithm;
 
+import net.jacoblo.lib.Util;
+
 public class LongestCommonSubsequence {
 	public static void main(String[] args) {
 		String s1 = "ABCDGH";
@@ -39,7 +41,7 @@ public class LongestCommonSubsequence {
 		// case 3 : the last index n of s2 should be empty, to make this optimal
 		int LCSempty2 = LongestCommonSubsequenceNaiveDP(s1,s2, currentIndex1, currentIndex2-1) ;
 		
-		return max(LCSmatch, LCSempty1, LCSempty2);
+		return Util.<Integer>max(LCSmatch, LCSempty1, LCSempty2);
 	}
 	
 	public static int LongestCommonSubsequenceDP(String s1, String s2) {
@@ -61,20 +63,11 @@ public class LongestCommonSubsequence {
 				int LCSEmpty1 = LCS[i-1][j];
 				int LCSEmpty2 = LCS[i][j-1];
 				
-				LCS[i][j] = max(LCSmatch, LCSEmpty1, LCSEmpty2);
+				LCS[i][j] = Util.<Integer>max(LCSmatch, LCSEmpty1, LCSEmpty2);
 			}
 		}
 		
 		return LCS[s1.length()][s2.length()];
 	}
 	
-	public static int max(int ...inputs ) {
-		int result = Integer.MIN_VALUE;
-		for (int i : inputs) {
-			if (result < i) {
-				result = i;
-			}
-		}
-		return result;
-	}
 }
