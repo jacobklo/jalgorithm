@@ -4,7 +4,7 @@ package net.jacoblo.algorithm;
  * 
  * From : http://www.geeksforgeeks.org/count-possible-decodings-given-digit-sequence/
  * Count Possible Decodings of a given Digit Sequence
-Let 1 represent ‘A’, 2 represents ‘B’, etc. Given a digit sequence, count the number of possible decodings of the given digit sequence.
+Let 1 represent ï¿½Aï¿½, 2 represents ï¿½Bï¿½, etc. Given a digit sequence, count the number of possible decodings of the given digit sequence.
 
 Examples:
 
@@ -15,13 +15,12 @@ Output: 3
 Input: digits[] = "1234"
 Output: 3
 // The possible decodings are "ABCD", "LCD", "AWD"
-An empty digit sequence is considered to have one decoding. It may be assumed that the input contains valid digits from 0 to 9 and there are no leading 0’s, no extra trailing 0’s and no two or more consecutive 0’s.
+An empty digit sequence is considered to have one decoding. It may be assumed that the input contains valid digits from 0 to 9 and there are no leading 0ï¿½s, no extra trailing 0ï¿½s and no two or more consecutive 0ï¿½s.
  *
  */
 public class TotalDecodeMessages {
-  public static final int CHAR_RANGE = 25; //A = 1, B = 2, ... , Z = 26
   public static void main(String[] args) {
-    String test = "12";
+    String test = "1212";
     int result = totalDecodeMessages(test);
     System.out.println(result);
   }
@@ -31,9 +30,23 @@ public class TotalDecodeMessages {
     
     int[] totals = new int[input.length()+1];
     
-    for (int i = 1 ; i <= input.length() ; i++) {
-      int lastTotals = totals[i-1];
+    totals[0] = 1;
+    totals[1] = 1;
+    
+    for (int i = 2; i <= input.length() ; i++) {
+    	totals[i] = 0;
+    	
+    	// if the ten digit is not zero
+    	if (input.charAt(i-1) > '0') {
+    		totals[i] = totals[i-1];
+    	}
+    	
+    	if ((input.charAt(i-2) == '1' || input.charAt(i-2) == '2') && input.charAt(i-1) < '7') {
+    		totals[i] += totals[i-2];
+    	}
     }
-    return -1;
+    
+    
+    return totals[input.length()];
   }
 }
