@@ -1,4 +1,4 @@
-package net.jacoblo.app;
+package net.jacoblo.app.algorithm.DynamicProgramming;
 
 import net.jacoblo.dataStructure.UnionFind.UnionFind;
 import net.jacoblo.dataStructure.UnionFind.UnionFind.UnionFindVertex;

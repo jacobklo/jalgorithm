@@ -1,4 +1,4 @@
-package net.jacoblo.app;
+package net.jacoblo.app.dataStructure.graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;

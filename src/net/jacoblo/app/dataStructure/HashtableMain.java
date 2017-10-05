@@ -1,4 +1,4 @@
-package net.jacoblo.app;
+package net.jacoblo.app.dataStructure;
 
 import net.jacoblo.dataStructure.Hashtable;
 
