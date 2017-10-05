@@ -2,13 +2,13 @@ package net.jacoblo.app;
 
 import java.util.ArrayList;
 
-import net.jacoblo.algorithm.Dijkstra;
 import net.jacoblo.data.Point;
-import net.jacoblo.data.Edge.BasicEdge;
-import net.jacoblo.data.Edge.VisitEdge;
-import net.jacoblo.data.Vertex.BasicVertex;
-import net.jacoblo.data.Vertex.VisitVertex;
-import net.jacoblo.dataStructure.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.Dijkstra;
+import net.jacoblo.dataStructure.graph.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
+import net.jacoblo.dataStructure.graph.Edge.VisitEdge;
+import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
+import net.jacoblo.dataStructure.graph.Vertex.VisitVertex;
 
 
 public class ShortestPathMain {

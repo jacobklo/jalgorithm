@@ -2,7 +2,7 @@ package net.jacoblo.data;
 
 import java.util.Map;
 
-import net.jacoblo.algorithm.Prime;
+import net.jacoblo.math.Prime;
 
 public class SimpleEntry<K,V> implements Map.Entry<K,V> {
 

@@ -2,7 +2,7 @@ package net.jacoblo.app;
 
 import java.util.ArrayList;
 
-import net.jacoblo.algorithm.Knapsack;
+import net.jacoblo.algorithm.DynamicProgramming.Knapsack;
 import net.jacoblo.data.KnapsackItem;
 
 public class KnapsackMain {

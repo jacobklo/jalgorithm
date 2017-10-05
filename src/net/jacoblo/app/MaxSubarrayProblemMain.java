@@ -2,7 +2,7 @@ package net.jacoblo.app;
 
 import java.util.ArrayList;
 
-import net.jacoblo.algorithm.MaxSubarrayProblem;
+import net.jacoblo.algorithm.DynamicProgramming.MaxSubarrayProblem;
 
 public class MaxSubarrayProblemMain {
 

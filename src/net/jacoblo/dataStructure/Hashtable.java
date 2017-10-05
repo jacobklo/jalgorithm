@@ -3,9 +3,9 @@ package net.jacoblo.dataStructure;
 import java.util.ArrayList;
 import java.util.Map;
 
-import net.jacoblo.algorithm.Prime;
 import net.jacoblo.data.SimpleEntry;
 import net.jacoblo.data.Tuple;
+import net.jacoblo.math.Prime;
 
 public class Hashtable<K,V> 
 {

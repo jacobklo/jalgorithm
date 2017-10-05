@@ -2,10 +2,10 @@ package net.jacoblo.app;
 
 import java.util.ArrayList;
 
-import net.jacoblo.algorithm.BreadthFirstSearch;
-import net.jacoblo.data.Edge.BasicEdge;
-import net.jacoblo.data.Vertex.BasicVertex;
-import net.jacoblo.dataStructure.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.BreadthFirstSearch;
+import net.jacoblo.dataStructure.graph.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
+import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
 
 public class TraversalMain {
 	public static void main(String[] args) {

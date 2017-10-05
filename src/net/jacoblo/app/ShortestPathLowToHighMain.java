@@ -6,8 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import net.jacoblo.algorithm.Sorting.HeapSort;
 import net.jacoblo.data.ValuePoint;
-import net.jacoblo.lib.HeapSort;
 
 public class ShortestPathLowToHighMain<T extends Number,K extends Number> {
   public static void main(String[] args) {

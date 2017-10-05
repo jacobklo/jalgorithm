@@ -1,13 +1,13 @@
 package net.jacoblo.app;
 
-import net.jacoblo.algorithm.Kruskal;
-import net.jacoblo.algorithm.Prim;
-import net.jacoblo.data.UnionFindVertex;
-import net.jacoblo.data.Edge.VisitEdge;
-import net.jacoblo.data.Vertex.BasicVertex;
-import net.jacoblo.data.Vertex.VisitVertex;
-import net.jacoblo.dataStructure.UndirectedGraph;
-import net.jacoblo.dataStructure.UnionFind;
+import net.jacoblo.dataStructure.UnionFind.UnionFind;
+import net.jacoblo.dataStructure.UnionFind.UnionFind.UnionFindVertex;
+import net.jacoblo.dataStructure.graph.Kruskal;
+import net.jacoblo.dataStructure.graph.Prim;
+import net.jacoblo.dataStructure.graph.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.Edge.VisitEdge;
+import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
+import net.jacoblo.dataStructure.graph.Vertex.VisitVertex;
 
 public class MinimumSpanningTreeMain {
 	public static void main(String[] args) {
