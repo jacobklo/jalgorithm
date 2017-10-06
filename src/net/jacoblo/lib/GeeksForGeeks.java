@@ -53,7 +53,7 @@ public class GeeksForGeeks {
   public static Case[] calc(String[] inputs, Parameter[] para) {
     if (inputs == null || para == null || inputs.length == 0 || para.length == 0) return new Case[0];
     
-    // FIrst input, it is test cases number
+    // First input, it is test cases number
     int numOfTestCase = Integer.parseInt(inputs[0]);
     
     // For each test case, calculate input. For each question we actually don't need the parameters, so we need input para
@@ -77,6 +77,13 @@ public class GeeksForGeeks {
           }
           i += sizeOfCurrentArray+1; // remember i++?
           newInputPara.InputPara.add(currentArray);
+        }
+        else if (currentPara == Parameter.MATRIXINTEGER) {
+          int numOfRow = Integer.parseInt(inputs[i]);
+          i++;
+          int numOfColumn = Integer.parseInt(inputs[i]);
+          i++;
+          
         }
       }
       cases.add(newInputPara);
