@@ -1,45 +1,14 @@
 package net.jacoblo.lib;
 
 import java.util.ArrayList;
-import net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubsequence;
+import java.util.Scanner;
 
+/**
+ * This Class translate inputs string from geeksforgeeks to correct input
+ * @author Jacob Lo
+ *
+ */
 public class GeeksForGeeks {
-  public static void main(String[] args) {
-    // Example from Longest Increasing Subsequence
-    //http://practice.geeksforgeeks.org/problems/longest-increasing-subsequence/0
-    
-    String[] input1 = { "1",
-        "16",
-        "0", "8", "4", "12", "2", "10", "6", "14", "1", "9", "5", "13", "3", "11", "7", "15" };
-    
-    // Double testcase, actually the same
-    String[] input2 = { "2",
-        "16",
-        "0", "8", "4", "12", "2", "10", "6", "14", "1", "9", "5", "13", "3", "11", "7", "15",
-        "16",
-        "0", "8", "4", "12", "2", "10", "6", "14", "1", "9", "5", "13", "3", "11", "7", "15"};
-    
-    String[] inputMatrix = { "1", 
-    		"2", "3",
-    		"1", "2", "3", "4", "5", "6" };
-    
-    Parameter[] para = { Parameter.ARRAY };
-    String[] types = { "Integer" };
-    Case[] testCases = GeeksForGeeks.calc(input2, para, types);
-    
-    Parameter[] para2 = { Parameter.MATRIXRECTANGLE };
-    String[] types2 = { "Integer" };
-    Case[] testCases2 = GeeksForGeeks.calc(inputMatrix, para2, types2);
-    
-    String outputs = "";
-    for ( Case c : testCases) {
-      int[] inputArray1 = (int[])c.get(0);
-      int result = LongestIncreasingSubsequence.LongestIncreasingSubsequenceDP(inputArray1, inputArray1.length);
-      outputs += Integer.toString(result) + "\n";
-    }
-
-    System.out.println(outputs);
-  }
   
   public enum Parameter {
     NUMBER,
@@ -58,6 +27,62 @@ public class GeeksForGeeks {
     public Object get(int index) {
       return InputPara.get(index);
     }
+  }
+  
+  public static int[] getInputs(Parameter[] para) {
+  	ArrayList<Integer> result = new ArrayList<>();
+  	Scanner scan = new Scanner(System.in);
+  	
+  	int numOfCases = scan.nextInt();
+  	result.add(numOfCases);
+  	
+  	for (int c = 0 ; c < numOfCases ; c++) {
+  		for (Parameter p : para) {
+  			if (p == Parameter.NUMBER) {
+  				result.add(scan.nextInt());
+  			}
+  			else if (p == Parameter.ARRAY) {
+  				int numOfItems = scan.nextInt();
+  				result.add(numOfItems);
+  				
+  				for (int i = 0 ; i < numOfItems ; i++) {
+  					result.add(Integer.parseInt(scan.next()));
+  				}
+  			}
+  			else if (p == Parameter.MATRIXRECTANGLE || p == Parameter.MATRIXSQUARE) {
+  				int numOfRow = scan.nextInt();
+  				result.add(numOfRow);
+          int numOfColumn = numOfRow;
+          if (p == Parameter.MATRIXRECTANGLE) {
+          	numOfColumn = scan.nextInt();
+            result.add(numOfColumn);
+          }
+          for (int i = 0 ; i < numOfRow * numOfColumn ; i++) {
+          	result.add(scan.nextInt());
+          }
+  			}
+  		}
+  	}
+  	
+  	scan.close();
+  	
+  	int[] resultInt = new int[result.size()];
+  	for (int i = 0 ; i < resultInt.length ; i++) {
+  		resultInt[i] = result.get(i);
+  	}
+  	return resultInt;
+  }
+  
+  public static Case[] calc(int[] inputs, Parameter[] para) {
+  	String[] intInputs = new String[inputs.length];
+  	for (int i = 0 ; i < inputs.length ; i++) {
+  		intInputs[i] = Integer.toString(inputs[i]);
+  	}
+  	String[] types = new String[para.length];
+  	for (int i = 0 ; i < types.length ; i++) {
+  		types[i] = "Integer";
+  	}
+  	return calc(intInputs, para, types);
   }
   
   public static Case[] calc(String[] inputs, Parameter[] para, String[] types) {
