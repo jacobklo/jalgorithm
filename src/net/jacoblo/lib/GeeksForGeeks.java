@@ -3,6 +3,10 @@ package net.jacoblo.lib;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import net.jacoblo.dataStructure.graph.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
+import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
+
 /**
  * This Class translate inputs string from geeksforgeeks to correct input
  * @author Jacob Lo
@@ -15,7 +19,8 @@ public class GeeksForGeeks {
     ARRAY,
     MATRIXRECTANGLE,
     MATRIXSQUARE,
-    STRING
+    STRING,
+    GRAPH
   }
   
   public static class Case {
@@ -52,6 +57,18 @@ public class GeeksForGeeks {
   				for (int i = 0 ; i < numOfItems ; i++) {
   					result.add(scan.next());
   				}
+  			}
+  			else if ( p == Parameter.GRAPH ) {
+  			  int numOfVertices = scan.nextInt();
+  			  result.add(Integer.toString(numOfVertices));
+  			  int numOfColor = scan.nextInt();
+  			  result.add(Integer.toString(numOfColor));
+  			  int numOfEdges = scan.nextInt();
+  			  result.add(Integer.toString(numOfEdges));
+  			  
+  			  for (int i = 0 ; i < numOfEdges * 2 ; i++) {
+  			    result.add(scan.next());
+  			  }
   			}
   			else if (p == Parameter.MATRIXRECTANGLE || p == Parameter.MATRIXSQUARE) {
   				int numOfRow = scan.nextInt();
@@ -134,6 +151,29 @@ public class GeeksForGeeks {
           }
           
           i += sizeOfCurrentArray+1; // remember i++?
+        }
+        else if (currentPara == Parameter.GRAPH) {
+          int numOfVertices = Integer.parseInt(inputs[i]);
+          i++;
+          int numOfColor = Integer.parseInt(inputs[i]);
+          i++;
+          int numOfEdges = Integer.parseInt(inputs[i]);
+          
+          UndirectedGraph<BasicVertex<Integer>,BasicEdge<Integer>> graph = new UndirectedGraph<>();
+          for (int v = 0 ; v < numOfVertices ; v++) {
+            BasicVertex<Integer> newVertex = new BasicVertex<>(""+v,v,v);
+            graph.addVertex(newVertex);
+          }
+          for (int e = 1 ; e <= numOfEdges * 2 ; e=e+2) {
+            int fromVertex = Integer.parseInt(inputs[i+e])-1; // start from 0 instead of 1
+            int toVertex = Integer.parseInt(inputs[i+e+1])-1;
+            UndirectedGraph.<BasicVertex<Integer>,Integer>addEdge(graph.getVertices().get(fromVertex),graph.getVertices().get(toVertex),1);
+          }
+          
+          newInputPara.InputPara.add(graph);
+          newInputPara.InputPara.add(numOfColor);
+          i += numOfEdges * 2 +1; // remember i++?
+          
         }
         else if (currentPara == Parameter.MATRIXRECTANGLE) {
           int numOfRow = Integer.parseInt(inputs[i]);

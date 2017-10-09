@@ -2,7 +2,7 @@ package net.jacoblo.app.dataStructure.graph;
 
 import java.util.ArrayList;
 
-import net.jacoblo.dataStructure.graph.BreadthFirstSearch;
+import net.jacoblo.algorithm.Graph.BreadthFirstSearch;
 import net.jacoblo.dataStructure.graph.UndirectedGraph;
 import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
 import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;

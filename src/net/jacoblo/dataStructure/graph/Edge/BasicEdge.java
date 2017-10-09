@@ -49,6 +49,7 @@ public class BasicEdge<K extends Number>
   public void setToVertex(Vertexable t) { to = t; }
   @Override
   public void setFromVertex(Vertexable f) { from = f; }
+  @SuppressWarnings("unchecked")
   @Override
   public void setWeight(Number w) { weight = (K)w; }
 

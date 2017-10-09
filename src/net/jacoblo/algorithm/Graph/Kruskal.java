@@ -1,9 +1,11 @@
-package net.jacoblo.dataStructure.graph;
+package net.jacoblo.algorithm.Graph;
 
 import java.util.PriorityQueue;
 
 import net.jacoblo.dataStructure.UnionFind.UnionFind;
 import net.jacoblo.dataStructure.UnionFind.UnionFind.UnionFindVertex;
+import net.jacoblo.dataStructure.graph.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.VisitGraph;
 import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
 import net.jacoblo.dataStructure.graph.Edge.Edgeable;
 import net.jacoblo.dataStructure.graph.Edge.VisitEdge;

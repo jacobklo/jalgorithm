@@ -1,8 +1,9 @@
-package net.jacoblo.dataStructure.graph;
+package net.jacoblo.algorithm.Graph;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import net.jacoblo.dataStructure.graph.Graph;
 import net.jacoblo.dataStructure.graph.Edge.Edgeable;
 import net.jacoblo.dataStructure.graph.Vertex.Vertexable;
 

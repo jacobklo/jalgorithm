@@ -6,6 +6,10 @@ import net.jacoblo.algorithm.Backtracking.CombinationSum;
 import net.jacoblo.algorithm.Backtracking.LargestNumberInKSwaps;
 import net.jacoblo.algorithm.Backtracking.PermutationWithSpaces;
 import net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubsequence;
+import net.jacoblo.algorithm.Graph.MColoringProblem;
+import net.jacoblo.dataStructure.graph.UndirectedGraph;
+import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
+import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
 import net.jacoblo.lib.GeeksForGeeks;
 import net.jacoblo.lib.GeeksForGeeks.Case;
 import net.jacoblo.lib.GeeksForGeeks.Parameter;
@@ -15,8 +19,24 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testNumberAndString());
+    System.out.println(testGraph());
   }
+	
+	private static String testGraph() {
+	  Parameter[] para = { Parameter.GRAPH };
+	  String[] types = { "Integer" };
+	  String[] inputs = GeeksForGeeks.getInputs(para);
+	  Case[] testCases = GeeksForGeeks.calc(inputs, para, types);
+	  
+	   String output = "";
+	    for (Case c : testCases) {
+	      UndirectedGraph<BasicVertex<Integer>,BasicEdge<Integer>> graph = (UndirectedGraph<BasicVertex<Integer>,BasicEdge<Integer>>) c.get(0);
+	      int numOfColor = (int) c.get(1);
+	      String result = Integer.toString(MColoringProblem.mColoringProblem(graph, numOfColor));
+	      output += result + "\n";
+	    }
+	    return output;
+	}
 	
 	private static String testNumberAndString() {
 		Parameter[] para = { Parameter.NUMBER, Parameter.STRING };
