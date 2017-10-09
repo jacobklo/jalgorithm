@@ -1,5 +1,4 @@
 /**
- * TEST case failed for 4551711527
  * MEDIUM
  * Sited : http://practice.geeksforgeeks.org/problems/largest-number-in-k-swaps/0
  * Given a number K and string S of digits denoting a positive integer, build the largest number possible by performing swap operations on the digits of S atmost K times.
@@ -42,9 +41,9 @@ import java.util.ArrayList;
 
 public class LargestNumberInKSwaps {
 	public static void main(String[] args) {
-		String input = "1234567";
-		int numOfSwaps = 4;
-		System.out.println(largestNumberInKSwaps(input, numOfSwaps));
+//		String input = "1234567";
+//		int numOfSwaps = 4;
+//		System.out.println(largestNumberInKSwaps(input, numOfSwaps));
 		
 		String input2 = "4551711527";
 		int numOfSwaps2 = 3;
@@ -85,10 +84,11 @@ public class LargestNumberInKSwaps {
 				}
 			}
 			
+			// So we check which digit ( both are the largest one so far ) swap, to see which generate higher result
 			char[] whichValueMax = array;
 			for (int i = 0 ; i < allMaxDigit.size() ; i++) {
 				char[] cloneArr = clone(array);
-				swap(cloneArr, currentIndex, maxDigitSoFarIndex);
+				swap(cloneArr, currentIndex, allMaxDigit.get(i));
 				char[] curResult = largestNumberInKSwaps(cloneArr, currentIndex+1, numOfSwaps-1);
 				if (compare(curResult, whichValueMax) > 0) {
 					whichValueMax = curResult;
