@@ -52,15 +52,17 @@ package net.jacoblo.algorithm.Backtracking;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import net.jacoblo.lib.Util;
+
 public class CombinationSum {
 	public static void main(String[] args) {
 		int[] input = { 10,1,2,7,6,1,5 };
 		ArrayList<ArrayList<Integer>> result = combinationSum(input, 8);
-		System.out.println(printResult(result));
+		System.out.println(Util.<Integer>printResult(result));
 		
 		int[] input2 = { 6, 5, 6, 3, 4, 3, 9, 9  };
 		ArrayList<ArrayList<Integer>> result2 = combinationSum(input2, 17);
-		System.out.println(printResult(result2));
+		System.out.println(Util.<Integer>printResult(result2));
 		
 	}
 	
@@ -102,24 +104,7 @@ public class CombinationSum {
 		
 		return currentResult;
 	}
-	
-	public static String printResult(ArrayList<ArrayList<Integer>> result) {
-		if (result == null || result.size() == 0) return "Empty";
-		
-		String s = "";
-		for (ArrayList<Integer> each : result) {
-			s += "(";
-			for (int i = 0 ; i < each.size(); i++) {
-				s += each.get(i);
-				if (i + 1 < each.size()) {
-					s += " ";
-				}
-			}
-			s += ")";
-		}
-		return s;
-	}
-	
+
 	private static boolean ifArraysEqual(ArrayList<Integer> a1, ArrayList<Integer> a2) {
 		if (a1 == null || a2 == null) return false;
 		
