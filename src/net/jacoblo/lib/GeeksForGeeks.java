@@ -14,7 +14,8 @@ public class GeeksForGeeks {
     NUMBER,
     ARRAY,
     MATRIXRECTANGLE,
-    MATRIXSQUARE
+    MATRIXSQUARE,
+    STRING
   }
   
   public static class Case {
@@ -29,36 +30,39 @@ public class GeeksForGeeks {
     }
   }
   
-  public static int[] getInputs(Parameter[] para) {
-  	ArrayList<Integer> result = new ArrayList<>();
+  public static String[] getInputs(Parameter[] para) {
+  	ArrayList<String> result = new ArrayList<>();
   	Scanner scan = new Scanner(System.in);
   	
   	int numOfCases = scan.nextInt();
-  	result.add(numOfCases);
+  	result.add(Integer.toString(numOfCases));
   	
   	for (int c = 0 ; c < numOfCases ; c++) {
   		for (Parameter p : para) {
   			if (p == Parameter.NUMBER) {
-  				result.add(scan.nextInt());
+  				result.add(scan.next());
+  			}
+  			else if ( p == Parameter.STRING ) {
+  				result.add(scan.next());
   			}
   			else if (p == Parameter.ARRAY) {
   				int numOfItems = scan.nextInt();
-  				result.add(numOfItems);
+  				result.add(Integer.toString(numOfItems));
   				
   				for (int i = 0 ; i < numOfItems ; i++) {
-  					result.add(Integer.parseInt(scan.next()));
+  					result.add(scan.next());
   				}
   			}
   			else if (p == Parameter.MATRIXRECTANGLE || p == Parameter.MATRIXSQUARE) {
   				int numOfRow = scan.nextInt();
-  				result.add(numOfRow);
+  				result.add(Integer.toString(numOfRow));
           int numOfColumn = numOfRow;
           if (p == Parameter.MATRIXRECTANGLE) {
           	numOfColumn = scan.nextInt();
-            result.add(numOfColumn);
+            result.add(Integer.toString(numOfColumn));
           }
           for (int i = 0 ; i < numOfRow * numOfColumn ; i++) {
-          	result.add(scan.nextInt());
+          	result.add(scan.next());
           }
   			}
   		}
@@ -66,23 +70,19 @@ public class GeeksForGeeks {
   	
   	scan.close();
   	
-  	int[] resultInt = new int[result.size()];
-  	for (int i = 0 ; i < resultInt.length ; i++) {
-  		resultInt[i] = result.get(i);
+  	String[] resultString = new String[result.size()];
+  	for (int i = 0 ; i < resultString.length ; i++) {
+  		resultString[i] = result.get(i);
   	}
-  	return resultInt;
+  	return resultString;
   }
   
-  public static Case[] calc(int[] inputs, Parameter[] para) {
-  	String[] intInputs = new String[inputs.length];
-  	for (int i = 0 ; i < inputs.length ; i++) {
-  		intInputs[i] = Integer.toString(inputs[i]);
-  	}
+  public static Case[] calc(String[] inputs, Parameter[] para) {
   	String[] types = new String[para.length];
   	for (int i = 0 ; i < types.length ; i++) {
   		types[i] = "Integer";
   	}
-  	return calc(intInputs, para, types);
+  	return calc(inputs, para, types);
   }
   
   public static Case[] calc(String[] inputs, Parameter[] para, String[] types) {
@@ -110,6 +110,10 @@ public class GeeksForGeeks {
             newInputPara.InputPara.add(currentDouble);
         	}
           i++;
+        }
+        else if (currentPara == Parameter.STRING ) {
+        	newInputPara.InputPara.add(inputs[i]);
+        	i++;
         }
         else if (currentPara == Parameter.ARRAY) {
           int sizeOfCurrentArray = Integer.parseInt(inputs[i]);

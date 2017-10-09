@@ -3,6 +3,8 @@ package net.jacoblo.app.lib;
 import java.util.ArrayList;
 
 import net.jacoblo.algorithm.Backtracking.CombinationSum;
+import net.jacoblo.algorithm.Backtracking.LargestNumberInKSwaps;
+import net.jacoblo.algorithm.Backtracking.PermutationWithSpaces;
 import net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubsequence;
 import net.jacoblo.lib.GeeksForGeeks;
 import net.jacoblo.lib.GeeksForGeeks.Case;
@@ -12,22 +14,52 @@ public class GeeksForGeeksMain {
 	public static void main(String[] args) {
 //    System.out.println(testArray());
 //    testMatrix();
-    System.out.println(test2Cases());
-    
+//    System.out.println(test2Cases());
+    System.out.println(testNumberAndString());
   }
+	
+	private static String testNumberAndString() {
+		Parameter[] para = { Parameter.NUMBER, Parameter.STRING };
+		String[] types = { "Integer", "String" };
+		String[] inputs = GeeksForGeeks.getInputs(para);
+		Case[] testCases = GeeksForGeeks.calc(inputs, para, types);
+		
+		String output = "";
+		for (Case c : testCases) {
+			int numOfSwaps = (int) c.get(0);
+			String inputArray = (String) c.get(1);
+			String result = LargestNumberInKSwaps.largestNumberInKSwaps(inputArray, numOfSwaps);
+			output += result + "\n";
+		}
+		return output;
+	}
+	
+	private static String testString() {
+		Parameter[] paraString = { Parameter.STRING };
+		String[] types = { "String" };
+		String[] input = GeeksForGeeks.getInputs(paraString);
+		Case[] testCasesString = GeeksForGeeks.calc(input, paraString, types);
+		
+		String output = "";
+		for (Case c : testCasesString) {
+			String inputForCase = (String) c.get(0);
+			String[] result = PermutationWithSpaces.permutationWithSpaces(inputForCase);
+			output += PermutationWithSpaces.printResult(result) + "\n";
+		}
+		return output;
+	}
 
 	private static String test2Cases() {
 		// http://practice.geeksforgeeks.org/problems/combination-sum-part-2/0
     
 		Parameter[] para3 =  { Parameter.ARRAY, Parameter.NUMBER };
-    int[] input3 = GeeksForGeeks.getInputs(para3);/*= {2
+    String[] input3 = GeeksForGeeks.getInputs(para3);/*= {2
     		,7
     		,10, 1, 2, 7, 6, 1, 5
     		,8
     		,5
     		,8, 1, 8, 6, 8
     		,12 };*/
-    String[] types3 = { "Integer", "Integer" };
     Case[] testCases3 = GeeksForGeeks.calc(input3, para3);
     
     String output3 = "";
