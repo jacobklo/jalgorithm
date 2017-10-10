@@ -45,7 +45,7 @@ import java.util.Arrays;
 public class CrazyEquations {
 	public static void main(String[] args) {
 		int a = 1, b = 2, c = 2, d = 1;
-		int n = 5;
+		int n = 10;
 		int result = crazyEquations(n,a,b,c,d);
 		System.out.println(result);
 	}
@@ -60,6 +60,6 @@ public class CrazyEquations {
 		
 		Arrays.sort(arr);
 		
-		return (arr[3] - arr[0] <= n ? 5 - (arr[3] - arr[0]) : 0);
+		return (arr[3] - arr[0] <= n ? n - (arr[3] - arr[0]) : 0);
 	}
 }
