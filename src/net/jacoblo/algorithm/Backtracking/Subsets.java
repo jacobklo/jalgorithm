@@ -19,7 +19,7 @@ public class Subsets {
     
     return subsets(set,set.length-1);
   }
-  This is a dump way to do, using bitset is faster
+  // TODO : This is a dump way to do, using bitset is faster
   public static ArrayList<ArrayList<Integer>> subsets(int[] set, int curIndex) {
     
     if (curIndex < 0 || set == null || set.length <= 0) return new ArrayList<>();

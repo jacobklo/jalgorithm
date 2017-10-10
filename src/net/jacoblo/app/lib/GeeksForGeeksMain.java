@@ -3,6 +3,7 @@ package net.jacoblo.app.lib;
 import java.util.ArrayList;
 
 import net.jacoblo.algorithm.Backtracking.CombinationSum;
+import net.jacoblo.algorithm.Backtracking.CrazyEquations;
 import net.jacoblo.algorithm.Backtracking.LargestNumberInKSwaps;
 import net.jacoblo.algorithm.Backtracking.PermutationWithSpaces;
 import net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubsequence;
@@ -19,8 +20,27 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testGraph());
+    System.out.println(testCrazyEquations());
   }
+	
+	private static String testCrazyEquations() {
+		Parameter[] para = { Parameter.NUMBER, Parameter.NUMBER,Parameter.NUMBER,Parameter.NUMBER,Parameter.NUMBER };
+	  String[] types = { "Integer" ,"Integer","Integer","Integer","Integer"};
+	  String[] inputs = GeeksForGeeks.getInputs(para);
+	  Case[] testCases = GeeksForGeeks.calc(inputs, para, types);
+	  
+	   String output = "";
+	    for (Case ca : testCases) {
+	      int n = (int) ca.get(0);
+	      int a = (int) ca.get(1);
+	      int b = (int) ca.get(2);
+	      int c = (int) ca.get(3);
+	      int d = (int) ca.get(4);
+	      String result = Integer.toString(CrazyEquations.crazyEquations(n, a, b, c, d));
+	      output += result + "\n";
+	    }
+	    return output;
+	}
 	
 	private static String testGraph() {
 	  Parameter[] para = { Parameter.GRAPH };

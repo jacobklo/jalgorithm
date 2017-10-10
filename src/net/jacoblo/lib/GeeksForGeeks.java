@@ -3,9 +3,6 @@ package net.jacoblo.lib;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import net.jacoblo.dataStructure.graph.UndirectedGraph;
-import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
-import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
 
 /**
  * This Class translate inputs string from geeksforgeeks to correct input
@@ -152,6 +149,7 @@ public class GeeksForGeeks {
           
           i += sizeOfCurrentArray+1; // remember i++?
         }
+        /*
         else if (currentPara == Parameter.GRAPH) {
           int numOfVertices = Integer.parseInt(inputs[i]);
           i++;
@@ -175,6 +173,7 @@ public class GeeksForGeeks {
           i += numOfEdges * 2 +1; // remember i++?
           
         }
+        */
         else if (currentPara == Parameter.MATRIXRECTANGLE) {
           int numOfRow = Integer.parseInt(inputs[i]);
           i++;
