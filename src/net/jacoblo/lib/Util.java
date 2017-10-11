@@ -27,6 +27,19 @@ public class Util {
     return current;
   }
 	
+	public static String printResult(String[] result) {
+    if (result == null || result.length == 0) return "";
+    
+    String s = "";
+    for (String i : result) {
+      s += "(";
+      s += i;
+      s += ")";
+    }
+    
+    return s;
+  }
+	
 	public static <T> String printResult(ArrayList<ArrayList<T>> result) {
     if (result == null || result.size() == 0) return "Empty";
     

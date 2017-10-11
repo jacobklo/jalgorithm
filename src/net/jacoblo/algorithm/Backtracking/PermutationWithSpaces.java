@@ -25,6 +25,7 @@ Output:
  */
 
 package net.jacoblo.algorithm.Backtracking;
+import static net.jacoblo.lib.Util.printResult;
 
 public class PermutationWithSpaces {
 	public static void main(String[] args) {
@@ -54,16 +55,5 @@ public class PermutationWithSpaces {
 		return result;
 	}
 	
-	public static String printResult(String[] result) {
-		if (result == null || result.length == 0) return "";
-		
-		String s = "";
-		for (String i : result) {
-			s += "(";
-			s += i;
-			s += ")";
-		}
-		
-		return s;
-	}
+	
 }
