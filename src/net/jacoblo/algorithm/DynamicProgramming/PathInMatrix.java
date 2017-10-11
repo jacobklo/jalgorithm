@@ -63,7 +63,8 @@ public class PathInMatrix {
     System.out.println(result);
     
     int [][] sumMat = { { 348, 391},
-                        { 618, 193}};
+                        { 618, 193},
+                        { 100, 200}};
     
     int sumResult = largestSumPathInMatrixDP(sumMat);
     System.out.println(sumResult);
@@ -72,17 +73,37 @@ public class PathInMatrix {
   public static int largestSumPathInMatrixDP(int[][] mat) {
     if (mat == null) return 0;
     
-    int[][] moves = { { 1, -1},
-                    { 1, 0},
-                    {1, 1}};
-    
-    int[][] result = new int[mat[0].length+1][mat.length];
+    int[][] result = new int[mat.length+1][mat[0].length];
     
     for (int i = 0 ; i < mat[0].length ; i++) {
       result[1][i] = mat[0][i];
     }
     
-    return 0;
+    for (int row = 2 ; row <= mat.length ; row++) {
+    	for (int column = 0 ; column < mat[0].length ; column++) {
+        int left = 0, center = 0, right = 0;
+    		
+    		if (column-1 >= 0) {
+        	left = result[row-1][column-1];
+        }
+    		center = result[row-1][column];
+    		if (column+1 < mat[0].length) {
+    			right = result[row-1][column+1];
+    		}
+    		
+    		int maxR = Math.max(right, Math.max(left, center));
+    		result[row][column] = maxR + mat[row-1][column];
+      }
+    }
+    
+    int maxResult = 0;
+    for (int column = 0 ; column < mat[0].length ; column++) {
+    	if (maxResult < result[mat.length][column]) {
+    		maxResult = result[mat.length][column];
+    	}
+    }
+    
+    return maxResult;
   }
   
   public static int longestPathInMatrixDP(int[][] mat) {

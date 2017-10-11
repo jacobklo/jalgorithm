@@ -7,6 +7,7 @@ import net.jacoblo.algorithm.Backtracking.CrazyEquations;
 import net.jacoblo.algorithm.Backtracking.LargestNumberInKSwaps;
 import net.jacoblo.algorithm.Backtracking.PermutationWithSpaces;
 import net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubsequence;
+import net.jacoblo.algorithm.DynamicProgramming.PathInMatrix;
 import net.jacoblo.algorithm.Graph.MColoringProblem;
 import net.jacoblo.dataStructure.graph.UndirectedGraph;
 import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
@@ -14,14 +15,30 @@ import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
 import net.jacoblo.lib.GeeksForGeeks;
 import net.jacoblo.lib.GeeksForGeeks.Case;
 import net.jacoblo.lib.GeeksForGeeks.Parameter;
+import net.jacoblo.lib.Util;
 
 public class GeeksForGeeksMain {
 	public static void main(String[] args) {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testCrazyEquations());
+    System.out.println(testPathInMatrix());
   }
+	
+	private static String testPathInMatrix() {
+		Parameter[] para = { Parameter.MATRIXSQUARE };
+		String[] types = { "Integer" };
+	  String[] inputs = GeeksForGeeks.getInputs(para);
+	  Case[] testCases = GeeksForGeeks.calc(inputs, para, types);
+	  
+	   String output = "";
+	    for (Case ca : testCases) {
+	    	int[][] matrix = (int[][]) ca.get(0);
+	      String result = Integer.toString(PathInMatrix.largestSumPathInMatrixDP(matrix));
+	      output += result + "\n";
+	    }
+	    return output;
+	}
 	
 	private static String testCrazyEquations() {
 		Parameter[] para = { Parameter.NUMBER, Parameter.NUMBER,Parameter.NUMBER,Parameter.NUMBER,Parameter.NUMBER };
@@ -107,7 +124,7 @@ public class GeeksForGeeksMain {
     	int[] array = (int[])c.get(0);
     	int sum = (int)c.get(1);
     	ArrayList<ArrayList<Integer>> result = CombinationSum.combinationSum(array, sum);
-    	output3 += CombinationSum.printResult(result) + "\n";
+    	output3 += Util.<Integer>printResult(result) + "\n";
     }
 		return output3;
 	}
@@ -139,8 +156,8 @@ public class GeeksForGeeksMain {
     
     Parameter[] para = { Parameter.ARRAY };
     String[] types = { "Integer" };
-    Case[] testCases = GeeksForGeeks.calc(input2, para, types);
-    
+	  String[] inputs = GeeksForGeeks.getInputs(para);
+	  Case[] testCases = GeeksForGeeks.calc(inputs, para, types);
     
     String outputs = "";
     for ( Case c : testCases) {

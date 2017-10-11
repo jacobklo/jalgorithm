@@ -1,4 +1,4 @@
-package net.jacoblo.algorithm;
+package net.jacoblo.algorithm.Greedy;
 
 import java.util.ArrayList;
 import java.util.Comparator;

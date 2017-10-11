@@ -2,7 +2,7 @@ package net.jacoblo.app.algorithm.DynamicProgramming;
 
 import java.util.ArrayList;
 
-import net.jacoblo.algorithm.SchedulingGreedy;
+import net.jacoblo.algorithm.Greedy.SchedulingGreedy;
 import net.jacoblo.data.Job;
 
 public class SchedulingMain {
