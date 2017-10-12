@@ -1,5 +1,7 @@
 package net.jacoblo.algorithm.Backtracking;
 
+import java.util.ArrayList;
+
 public class Sudoku {
 	public static void main (String[] args) {
 		int[][] board = { { 3, 0, 6,  5, 0, 8,  4, 0, 0 },
@@ -14,55 +16,113 @@ public class Sudoku {
 											{ 0, 0, 0,  0, 0, 0,  0, 7, 4 },
 											{ 0, 0, 5,  2, 0, 6,  3, 0, 0 } };
 		
-		
+   		
 		System.out.println(printSudoku(board));
+		solveSudoku(board);
+		System.out.println(printSudokuArray(board));
 	}
 	
-	public static int[][] solveSudoku(int[][] board, int x, int y) {
-		if (board == null || board.length != 9 || board[0].length != 9) return new int[0][0];
+	public static boolean solveSudoku(int[][] board) {
+	  if (board == null || board.length != 9 || board[0].length != 9) return false;
+	  ArrayList<ArrayList<Integer>> unsolve = getAllUnsolve(board);
+    return solveSudoku(board, unsolve, 0, unsolve.size());
+	}
+	
+	public static boolean solveSudoku(int[][] board, ArrayList<ArrayList<Integer>> unsolvedSoFar, int solvingIndex, int numOfUnAnswered) {
+		if (board == null || board.length != 9 || board[0].length != 9) return false;
 		
-		return board;
+		if (numOfUnAnswered <= 0) {
+		  return true;
+		}
+	
+		int x = unsolvedSoFar.get(solvingIndex).get(0);
+		int y = unsolvedSoFar.get(solvingIndex).get(1);
+    
+		for ( int i = 1 ; i <= 9 ; i++ ) {
+		  int curResult = getMove(board, x,y,i ) ;
+		  if (curResult > 0) {
+		    board[x][y] = curResult;
+		    
+		    if (unsolvedSoFar.size() >= 1) {
+		      boolean subResult = solveSudoku(board,unsolvedSoFar,solvingIndex+1, numOfUnAnswered-1);
+		      if (subResult) {
+		        return true;
+		      }
+		      else {
+		        board[x][y] = 0;
+		      }
+		    }
+		  }
+		}
+		
+		return false;
 	}
 	
-	private static int getMove(int[][] board, int x, int y) {
+	private static int getMove(int[][] board, int x, int y, int number) {
 		if (board == null || board.length != 9 || board[0].length != 9 || x < 0 || x > 9 || y < 0 || y > 9) return 0;
 		
 		if (board[x][y] > 0) return board[x][y];
 		
-		for (int i = 1 ; i <= 9 ; i++ ) {
-			// check if illegal
-			if (rowContains(board,x,i))	return 0;
-			if (columnContains(board,y,i))	return 0;
-			if (boxContains(board,x,y,i))	return 0;
-			
-			// TODO : 
-		}
+    if (rowContains(board,x,y,number).size() > 0)  return 0;
+    if (columnContains(board,x,y,number).size() > 0) return 0;
+    if (boxContains(board,x,y,number).size() > 0)  return 0;
+    
+		return number;
 	}
 	
-	private static boolean rowContains(int[][] board, int row, int number) {
-		if (board == null || board.length != 9 || board[0].length != 9 || row < 0 || row > 9 || number < 0 || number > 9) return false;
-		
-		for ( int column = 0 ; column < board[row].length ; column++ ) {
-			if (board[row][column] == number) {
-				return true;
-			}
-		}
-		return false;
+	private static ArrayList<ArrayList<Integer>> getAllUnsolve(int[][] board) {
+	  if (board == null || board.length != 9 || board[0].length != 9 ) return new ArrayList<>();
+	  
+	  ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+	  
+	  for ( int i = 0 ; i < 9 ; i++ ) {
+	    for ( int j = 0 ; j < 9 ; j++ ) {
+	      if (board[i][j] == 0 ) {
+	        ArrayList<Integer> newUnsolve = new ArrayList<>();
+	        newUnsolve.add(i);
+	        newUnsolve.add(j);
+	        result.add(newUnsolve);
+	      }
+	    }
+	  }
+	  
+	  return result;
 	}
 	
-	private static boolean columnContains(int[][] board, int column, int number) {
-		if (board == null || board.length != 9 || board[0].length != 9 || column < 0 || column > 9 || number < 0 || number > 9) return false;
-		
-		for ( int row = 0 ; row < board.length ; row++ ) {
-			if (board[row][column] == number) {
-				return true;
-			}
-		}
-		return false;
+	private static ArrayList<ArrayList<Integer>> rowContains(int[][] board, int row, int column, int number) {
+	  if (board == null || board.length != 9 || board[0].length != 9 || row < 0 || row > 9 || column < 0 || column > 9 || number < 0 || number > 9) return new ArrayList<>();
+	  
+	  ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+	  for (int c = 0 ; c < board[row].length ; c++ ) {
+	    if (c != column && board[row][c] == number) {
+	      ArrayList<Integer> coord = new ArrayList<>();
+	      coord.add(row);
+	      coord.add(c);
+	      result.add(coord);
+	    }
+	  }
+	  
+	  return result;
 	}
 	
-	private static boolean boxContains(int[][] board, int row, int column, int number) {
-		if (board == null || board.length != 9 || board[0].length != 9 || column < 0 || column > 9 || row < 0 || row > 9 || number < 0 || number > 9) return false;
+	private static ArrayList<ArrayList<Integer>> columnContains(int[][] board, int row, int column, int number) {
+	  if (board == null || board.length != 9 || board[0].length != 9 || row < 0 || row > 9 || column < 0 || column > 9 || number < 0 || number > 9) return new ArrayList<>();
+    
+    ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+    for ( int r = 0 ; r < board.length ; r++ ) {
+      if (r != row && board[r][column] == number) {
+        ArrayList<Integer> coord = new ArrayList<>();
+        coord.add(r);
+        coord.add(column);
+        result.add(coord);
+      }
+    }
+    
+    return result;
+  }
+	
+	private static ArrayList<ArrayList<Integer>> boxContains(int[][] board, int row, int column, int number) {
+		if (board == null || board.length != 9 || board[0].length != 9 || column < 0 || column > 9 || row < 0 || row > 9 || number < 0 || number > 9) return new ArrayList<>();
 		
 		int startRow = 0, startColumn = 0;
 		if (row >= 6)	startRow = 6;
@@ -70,15 +130,32 @@ public class Sudoku {
 		if ( column >= 6) startColumn = 6;
 		else if ( column >= 3 ) startColumn = 3;
 		
+		ArrayList<ArrayList<Integer>> result = new ArrayList<>();
 		for (int i = startRow ; i < startRow + 3 ; i++) {
 			for (int j = startColumn ; j < startColumn + 3 ; j++) {
-				if (board[i][j] == number) {
-					return true;
+				if (i != row && j != column && board[i][j] == number) {
+	        ArrayList<Integer> coord = new ArrayList<>();
+	        coord.add(i);
+	        coord.add(j);
+	        result.add(coord);
 				}
 			}
 		}
 		
-		return false;
+		return result;
+	}
+	
+	public static String printSudokuArray(int[][] board) {
+	  if (board == null || board.length != 9 || board[0].length != 9) return "";
+	  
+	  String result = "";
+    for (int i = 0 ; i < board.length ; i++) {
+      for (int j = 0 ; j < board[i].length ; j++) {
+        result += board[i][j] + " ";
+      }
+    }
+    
+    return result;
 	}
 	
 	public static String printSudoku(int[][] board) {

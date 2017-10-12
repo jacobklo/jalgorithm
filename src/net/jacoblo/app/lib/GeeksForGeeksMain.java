@@ -8,6 +8,8 @@ import net.jacoblo.algorithm.Backtracking.LargestNumberInKSwaps;
 import net.jacoblo.algorithm.Backtracking.PermutationWithSpaces;
 import static net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubsequence.LongestIncreasingSubsequenceDP;
 import static net.jacoblo.algorithm.DynamicProgramming.PathInMatrix.largestSumPathInMatrixDP;
+import static net.jacoblo.algorithm.Backtracking.Sudoku.solveSudoku;
+import static net.jacoblo.algorithm.Backtracking.Sudoku.printSudokuArray;
 import net.jacoblo.algorithm.Graph.MColoringProblem;
 import net.jacoblo.dataStructure.graph.UndirectedGraph;
 import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
@@ -24,8 +26,23 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testPathInMatrix());
+    System.out.println(testSudoku());
   }
+	
+	private static String testSudoku() {
+	  Parameter[] para = { Parameter.MATRIXSQUARE };
+    String[] types = { "Integer" };
+    String[] inputs = getInputs(para);
+    Case[] testCases = calc(inputs, para, types);
+    
+    String outputs = "";
+    for ( Case c : testCases) {
+      int[][] currentMatrix = (int[][]) c.get(0);
+      solveSudoku(currentMatrix);
+      outputs += printSudokuArray(currentMatrix) + "\n";
+    }
+    return outputs;
+	}
 	
 	private static String testPathInMatrix() {
 		Parameter[] para = { Parameter.MATRIXSQUARE };
