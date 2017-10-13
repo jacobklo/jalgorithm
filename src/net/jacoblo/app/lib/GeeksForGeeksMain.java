@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.jacoblo.algorithm.Backtracking.CombinationSum;
 import net.jacoblo.algorithm.Backtracking.CrazyEquations;
 import net.jacoblo.algorithm.Backtracking.LargestNumberInKSwaps;
-import net.jacoblo.algorithm.Backtracking.PermutationWithSpaces;
+import net.jacoblo.algorithm.Backtracking.Permutation;
 import static net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubsequence.LongestIncreasingSubsequenceDP;
 import static net.jacoblo.algorithm.DynamicProgramming.PathInMatrix.largestSumPathInMatrixDP;
 import static net.jacoblo.algorithm.Backtracking.Sudoku.solveSudoku;
@@ -123,7 +123,7 @@ public class GeeksForGeeksMain {
 		String output = "";
 		for (Case c : testCasesString) {
 			String inputForCase = (String) c.get(0);
-			String[] result = PermutationWithSpaces.permutationWithSpaces(inputForCase);
+			String[] result = Permutation.permutationWithSpaces(inputForCase);
 			output += Util.printResult(result) + "\n";
 		}
 		return output;
