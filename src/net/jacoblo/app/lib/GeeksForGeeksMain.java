@@ -11,6 +11,7 @@ import static net.jacoblo.algorithm.DynamicProgramming.PathInMatrix.largestSumPa
 import static net.jacoblo.algorithm.Backtracking.Sudoku.solveSudoku;
 import static net.jacoblo.algorithm.Backtracking.Sudoku.printSudokuArray;
 import net.jacoblo.algorithm.Graph.MColoringProblem;
+import static net.jacoblo.algorithm.Graph.MinKnightStep.minKnightStep;
 import net.jacoblo.dataStructure.graph.UndirectedGraph;
 import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
 import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;
@@ -26,7 +27,7 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testSudoku());
+    System.out.println(testMinKnightStep());
   }
 	
 	private static String testSudoku() {
@@ -59,21 +60,24 @@ public class GeeksForGeeksMain {
 	    return output;
 	}
 	
-	private static String testCrazyEquations() {
-		Parameter[] para = { Parameter.NUMBER, Parameter.NUMBER,Parameter.NUMBER,Parameter.NUMBER,Parameter.NUMBER };
-	  String[] types = { "Integer" ,"Integer","Integer","Integer","Integer"};
+	private static String testMinKnightStep() {
+		Parameter[] para = { Parameter.NUMBER, Parameter.NUMBER, Parameter.NUMBER, Parameter.NUMBER, Parameter.NUMBER, Parameter.NUMBER };
+	  String[] types = { "Integer" ,"Integer", "Integer", "Integer" ,"Integer", "Integer"};
 	  String[] inputs = getInputs(para);
 	  Case[] testCases = calc(inputs, para, types);
 	  
 	   String output = "";
 	    for (Case ca : testCases) {
 	      int n = (int) ca.get(0);
-	      int a = (int) ca.get(1);
-	      int b = (int) ca.get(2);
-	      int c = (int) ca.get(3);
-	      int d = (int) ca.get(4);
-	      String result = Integer.toString(CrazyEquations.crazyEquations(n, a, b, c, d));
-	      output += result + "\n";
+	      int m = (int) ca.get(1);
+	      int s1 = (int) ca.get(2);
+	      int s2 = (int) ca.get(3);
+	      int d1 = (int) ca.get(4);
+	      int d2 = (int) ca.get(5);
+	      int[] from = { s1, s2 };
+	      int[] to = { d1, d2 };
+	      int result = minKnightStep(m, n, from, to);
+	      output += Integer.toString(result) + "\n";
 	    }
 	    return output;
 	}
