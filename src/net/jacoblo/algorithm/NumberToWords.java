@@ -1,19 +1,50 @@
+
+/**
+ * http://practice.geeksforgeeks.org/problems/number-to-words/0
+ * Medium
+ * Given number into words. For example, if “1234” is given as input, output should be “one thousand two hundred and thirty four”
+
+Input:
+
+The first line of input contains an integer T denoting the number of test cases.
+The first line of each test case is N.
+
+Output:
+
+Print the number into words (in small letter).
+
+Constraints:
+
+1 ≤ T ≤ 100
+1 ≤ N ≤ 9999
+
+Example:
+
+Input:
+2
+2
+142
+
+Output:
+two
+one hundred and forty two
+ */
 package net.jacoblo.algorithm;
 
 public class NumberToWords {
   public static void main(String[] main) {
-    int number = 99;
+    int number = 300;
     String result = numberToWords( number);
     System.out.println(result);
   }
   
   public enum ScalesOfNumbers {
-    HUNDRED("Hundred", 3),
-    THOUSAND("Thousand", 4),
-    MILLION("Million", 7),
-    BILLION("Billion", 10),
-    TRILLION("Trillion", 13),
-    QUADRILLION("Quadrillion", 16);
+    HUNDRED("hundred", 3),
+    THOUSAND("thousand", 4),
+    MILLION("million", 7),
+    BILLION("billion", 10),
+    TRILLION("trillion", 13),
+    QUADRILLION("quadrillion", 16);
     
     
     public final String name;
@@ -23,10 +54,20 @@ public class NumberToWords {
       this.name = n;
       this.digit = d;
     }
+    
+    public static ScalesOfNumbers getValue(int digit) {
+    	ScalesOfNumbers[] s = ScalesOfNumbers.values();
+    	for (int i = 0 ; i < s.length ; i++) {
+    		if (s[i].digit == digit) {
+    			return s[i];
+    		}
+    	}
+			return null;
+    }
   }
   
   public enum NumberName {
-    ZERO("zero"),
+  	NONE(""),
     ONE("one"),
     TWO("two"),
     THREE("three"),
@@ -41,6 +82,11 @@ public class NumberToWords {
     
     private NumberName(String n) {
       this.name= n;
+    }
+    
+    public static NumberName getValue(int val) {
+    	if (val < 1 || val > 9) return NONE;
+    	return NumberName.values()[val];
     }
   }
   
@@ -64,6 +110,8 @@ public class NumberToWords {
   }
   
   public enum TeenName {
+  	NONE(""),
+  	TEN("ten"),
     ELEVEN("eleven"),
     TWELVE("twelve"),
     THIRTEEN("thirteen"),
@@ -81,60 +129,91 @@ public class NumberToWords {
     }
     
     public static TeenName getValue(int v) {
-      if (v < 11 || v > 19) return null;
-      return TeenName.values()[v-11];
+      if (v < 10 || v > 19) return NONE;
+      return TeenName.values()[v-9];
     }
   }
   
   public static String numberToWords(int number) {
     if ( number < 0 ) return "";
     String numberString = Integer.toString(number);
+    
+    String[] ss = separateString(numberString);
+
     String result = "";
-    
-    for (int i = 0 , j = numberString.length(); i < numberString.length() && j > 0; i++,j--) {
-      int nextLions = ((int)(j / 3)) * 3;
-      
-      System.out.println(nextLions);
+    for (int i = ss.length - 1; i >= 0 ; i-- ) {
+    	if (result.length() > 0) {
+    		result += " ";
+    	}
+    	result += numberToWordsHundreds(ss[i], i != 0);
+    	if (i > 0) {
+    		result += " " + ScalesOfNumbers.getValue(i*3+1).name;
+    	}
     }
     
-    return "";
+    return result;
   }
   
-  public static String numberToWordsHundreds(int number) {
+  public static String numberToWordsHundreds(String numberString, boolean noAnd) {
+    if (numberString == null || numberString.length() <= 0 || numberString.length() > 3) return "";
+  	
+    String hundredString = "", tenthString = "", singleString = "";
     
-    String numberString = Integer.toString(number);
-    
-    if (number < 1000) {
-      String result = "";
-      if (number > 99) {
-        char curChar = numberString.charAt(numberString.length() - 3);
-        result += NumberName.values()[Character.getNumericValue(curChar)].name + " " + ScalesOfNumbers.HUNDRED.name;
-      
-        if (number % 100 != 0) {
-          result += " and";
-        }
-      }
-      
-      if (number > 9 && numberString.charAt(numberString.length()-2) != '1') {
-        char curChar = numberString.charAt(numberString.length() - 2);
-        result += " ";
-        result +=  TenthName.values()[Character.getNumericValue(curChar)].name;
-      }
-      else if (number > 9 && numberString.charAt(numberString.length()-2) == '1') {
-        result += " ";
-        int digitNumber = 10 + Character.getNumericValue(numberString.charAt(numberString.length()-1));
-        result += TeenName.getValue(digitNumber).name;
-        return result;
-      }     
-      if (number > 0 && (number < 10 || numberString.charAt(numberString.length()-2) != '1')) {
-        char curChar = numberString.charAt(numberString.length() - 1);
-        result += " ";
-        result +=  NumberName.values()[Character.getNumericValue(curChar)].name;
-      }
-      return result;
+    if (numberString.length() >= 3 && numberString.charAt(numberString.length()-3) != '0') {
+    	hundredString += NumberName.getValue(Character.getNumericValue(numberString.charAt(numberString.length()-3))).name;
+    	hundredString += " " + ScalesOfNumbers.HUNDRED.name;
+    }
+    if (numberString.length() >= 2 && numberString.charAt(numberString.length()-2) == '1') {
+    	int num = Integer.parseInt(numberString.substring(numberString.length() - 2, numberString.length() ));
+    	tenthString += TeenName.getValue(num).name;
+    }
+    else {
+    	if (numberString.length() >= 2 && numberString.charAt(numberString.length()-2) != '0') {
+    		tenthString += TenthName.values()[Character.getNumericValue(numberString.charAt(numberString.length()-2))].name;
+    	}
+    	if (numberString.length() >= 1 && numberString.charAt(numberString.length() - 1) != '0') {
+    		singleString += NumberName.getValue(Character.getNumericValue(numberString.charAt(numberString.length()-1))).name;
+    	}
     }
     
-    return "";
+    String result = "";
+    result += hundredString;
+    if (result.length() > 0 && !noAnd && ( tenthString.length() > 0 || singleString.length() > 0)) {
+    	result += " and";
+    }
+    if (result.length() > 0 && tenthString.length() > 0) {
+    	result += " ";
+    }
+    result += tenthString;
+    if (result.length() > 0) {
+    	result += " ";
+    }
+    result += singleString;
+    return result;
   }
   
+  
+  private static String[] separateString(String numberString) {
+  	if (numberString == null || numberString.length() <= 0 ) return new String[0];
+  	
+  	if (numberString.length() <= 3) {
+  		String[] s = new String[1];
+  		s[0] = numberString;
+  		return s;
+  	}
+  	String[] s = new String[numberString.length() / 3 + 1];
+		int count = numberString.length();
+		
+  	for (int i = numberString.length(), j = 0; i >= 0 ; i=i-3,j++ ) {
+  		if (count < 3) {
+  			s[j] = numberString.substring(i-count, i);
+  		}
+  		else {
+  			s[j] = numberString.substring(i-3, i);
+  			count = count - 3;
+  		}
+  	}
+  	
+  	return s;
+  }
 }
