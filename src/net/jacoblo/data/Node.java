@@ -1,5 +1,7 @@
 package net.jacoblo.data;
 
+import net.jacoblo.dataStructure.Tree.BinarySearchTree;
+
 public class Node<E extends Object & Comparable<E>> implements Comparable<Node<E>>{
 	private String name;
 	private E value;
@@ -77,6 +79,12 @@ public class Node<E extends Object & Comparable<E>> implements Comparable<Node<E
 		result += "(" + ( left != null ? "/" : " ") + value + ( right != null ? "\\" : " " ) + ") ";
 		return result;
 	}
+	
+	public static <E extends Object & Comparable<E>> Node<E> convertFromArrayToBSTPreorder(E[] array) {
+    if (array == null || array.length <= 0 ) return null;
+    
+    
+  }
 	
 	public static <E extends Object & Comparable<E>> void swap(Node<E> a, Node<E> b) {
 		if (a == null || b == null) return;
