@@ -20,7 +20,8 @@ import net.jacoblo.lib.GeeksForGeeks.Case;
 import net.jacoblo.lib.GeeksForGeeks.Parameter;
 import static net.jacoblo.lib.GeeksForGeeks.getInputs;
 import static net.jacoblo.lib.GeeksForGeeks.calc;
-
+import static net.jacoblo.algorithm.array.Rotate2DArray.rotate2DArray90DegreeInPlace;
+import static net.jacoblo.algorithm.array.Rotate2DArray.printMatrix;
 import net.jacoblo.lib.Util;
 
 public class GeeksForGeeksMain {
@@ -28,7 +29,7 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testTicTacToe());
+    System.out.println(testMatrix());
   }
 	
 	private static String testTicTacToe() {
@@ -175,7 +176,7 @@ public class GeeksForGeeksMain {
 
 	private static String testMatrix() {
 		
-    Parameter[] para = { Parameter.MATRIXRECTANGLE };
+    Parameter[] para = { Parameter.MATRIXSQUARE };
     String[] types = { "Integer" };
     String[] inputs = getInputs(para);
     Case[] testCases = calc(inputs, para, types);
@@ -183,8 +184,8 @@ public class GeeksForGeeksMain {
     String outputs = "";
     for ( Case c : testCases) {
       int[][] currentMatrix = (int[][]) c.get(0);
-      int result = largestSumPathInMatrixDP(currentMatrix);
-      outputs += Integer.toString(result) + "\n";
+      int[][] result = rotate2DArray90DegreeInPlace(currentMatrix);
+      outputs += printMatrix(result) + "\n";
     }
     return outputs;
 	}
