@@ -2,6 +2,7 @@ package net.jacoblo.app.lib;
 
 import java.util.ArrayList;
 
+import net.jacoblo.algorithm.TicTacToe;
 import net.jacoblo.algorithm.Backtracking.CombinationSum;
 import net.jacoblo.algorithm.Backtracking.CrazyEquations;
 import net.jacoblo.algorithm.Backtracking.LargestNumberInKSwaps;
@@ -27,8 +28,28 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testMinKnightStep());
+    System.out.println(testTicTacToe());
   }
+	
+	private static String testTicTacToe() {
+		
+    Parameter[] para = { Parameter.STRING , Parameter.STRING, Parameter.STRING, Parameter.STRING,Parameter.STRING ,Parameter.STRING , Parameter.STRING, Parameter.STRING, Parameter.STRING};
+    String[] types = { "String" ,"String","String","String","String","String","String","String","String"};
+	  String[] inputs = getInputs(para);
+	  Case[] testCases = calc(inputs, para, types);
+    
+    String outputs = "";
+    for ( Case c : testCases) {
+      String inputArray1 = (String)c.get(0);
+      for (int i = 1 ; i < 9 ; i++ ) {
+      	inputArray1 += " " + (String)c.get(i);
+      }
+      char[][] board = TicTacToe.convertToBoard(inputArray1);
+      boolean result = TicTacToe.isValid(board);
+      outputs += result + "\n";
+    }
+		return outputs;
+	}
 	
 	private static String testSudoku() {
 	  Parameter[] para = { Parameter.MATRIXSQUARE };
