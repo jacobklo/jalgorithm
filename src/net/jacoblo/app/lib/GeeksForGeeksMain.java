@@ -22,6 +22,7 @@ import static net.jacoblo.lib.GeeksForGeeks.getInputs;
 import static net.jacoblo.lib.GeeksForGeeks.calc;
 import static net.jacoblo.algorithm.array.Rotate2DArray.rotate2DArray90DegreeInPlace;
 import static net.jacoblo.algorithm.array.Rotate2DArray.printMatrix;
+import static net.jacoblo.algorithm.DynamicProgramming.RegionsInMatrix.largestRegionInMatrix;
 import net.jacoblo.lib.Util;
 
 public class GeeksForGeeksMain {
@@ -176,7 +177,7 @@ public class GeeksForGeeksMain {
 
 	private static String testMatrix() {
 		
-    Parameter[] para = { Parameter.MATRIXSQUARE };
+    Parameter[] para = { Parameter.MATRIXRECTANGLE };
     String[] types = { "Integer" };
     String[] inputs = getInputs(para);
     Case[] testCases = calc(inputs, para, types);
@@ -184,8 +185,8 @@ public class GeeksForGeeksMain {
     String outputs = "";
     for ( Case c : testCases) {
       int[][] currentMatrix = (int[][]) c.get(0);
-      int[][] result = rotate2DArray90DegreeInPlace(currentMatrix);
-      outputs += printMatrix(result) + "\n";
+      int result = largestRegionInMatrix(currentMatrix);
+      outputs += Integer.toString(result) + "\n";
     }
     return outputs;
 	}
