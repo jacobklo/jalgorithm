@@ -4,9 +4,9 @@
  * Medium
  * 
  * Given a string detect the smallest window length that contains all the distinct characters of the given string even if it contains repeating element
-For eg. A = “aabcbcdbca”, then the result would be 4 as of the smallest window will be “dbca” .
+For eg. A = ï¿½aabcbcdbcaï¿½, then the result would be 4 as of the smallest window will be ï¿½dbcaï¿½ .
 
-Another example, in “aabcbcdb”, the smallest string that contains all the characters is “abcbcd”.
+Another example, in ï¿½aabcbcdbï¿½, the smallest string that contains all the characters is ï¿½abcbcdï¿½.
 
 Input:
 The first line of input contains an integer T denoting the no of test cases. Then T test cases follow. Each test case contains a string S.
@@ -34,7 +34,7 @@ import java.util.Hashtable;
 
 public class SmallestDistinctWindow {
   public static void main(String[] args) {
-    String in = "aabcbcdba";
+    String in = "qwertqwer";
     String result = smallestDistinctWindow(in);
     System.out.println(result);
   }
