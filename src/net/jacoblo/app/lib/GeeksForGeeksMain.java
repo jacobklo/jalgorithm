@@ -12,6 +12,8 @@ import static net.jacoblo.algorithm.DynamicProgramming.PathInMatrix.largestSumPa
 import static net.jacoblo.algorithm.Backtracking.Sudoku.solveSudoku;
 import static net.jacoblo.algorithm.Backtracking.Sudoku.printSudokuArray;
 import net.jacoblo.algorithm.Graph.MColoringProblem;
+import net.jacoblo.algorithm.array.LocksAndKeys;
+
 import static net.jacoblo.algorithm.Graph.MinKnightStep.minKnightStep;
 import net.jacoblo.dataStructure.graph.UndirectedGraph;
 import net.jacoblo.dataStructure.graph.Edge.BasicEdge;
@@ -30,7 +32,7 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testMatrix());
+    System.out.println(testArray());
   }
 	
 	private static String testTicTacToe() {
@@ -194,15 +196,16 @@ public class GeeksForGeeksMain {
 	private static String testArray() {
 		
     Parameter[] para = { Parameter.ARRAY };
-    String[] types = { "Integer" };
+    String[] types = { "Character" };
 	  String[] inputs = getInputs(para);
 	  Case[] testCases = calc(inputs, para, types);
     
     String outputs = "";
     for ( Case c : testCases) {
-      int[] inputArray1 = (int[])c.get(0);
-      int result = LongestIncreasingSubsequenceDP(inputArray1, inputArray1.length);
-      outputs += Integer.toString(result) + "\n";
+      char[] locks = (char[])c.get(0);
+      char[] keys = (char[])c.get(1);
+      char[] result = LocksAndKeys.locksAndKeys(locks,keys);
+      outputs += LocksAndKeys.printLocks(result) + "\n";
     }
 		return outputs;
 	}

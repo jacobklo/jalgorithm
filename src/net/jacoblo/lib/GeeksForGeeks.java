@@ -139,6 +139,14 @@ public class GeeksForGeeks {
             }
             newInputPara.InputPara.add(currentArray);
           }
+          else if (currentType.equals("Character")) {
+          	char[] currentArray = new char[sizeOfCurrentArray];
+            for ( int j = 1 ; j <= sizeOfCurrentArray ; j++) {
+              currentArray[j-1] = inputs[i+j].charAt(0);
+            }
+            newInputPara.InputPara.add(currentArray);
+            
+          }
           else {
           	double[] currentArray = new double[sizeOfCurrentArray];
             for ( int j = 1 ; j <= sizeOfCurrentArray ; j++) {
