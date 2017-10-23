@@ -58,8 +58,6 @@ public class GeeksForGeeks {
   			else if ( p == Parameter.GRAPH ) {
   			  int numOfVertices = scan.nextInt();
   			  result.add(Integer.toString(numOfVertices));
-  			  int numOfColor = scan.nextInt();
-  			  result.add(Integer.toString(numOfColor));
   			  int numOfEdges = scan.nextInt();
   			  result.add(Integer.toString(numOfEdges));
   			  
@@ -157,6 +155,24 @@ public class GeeksForGeeks {
           
           i += sizeOfCurrentArray+1; // remember i++?
         }
+        else if (currentPara == Parameter.GRAPH) {
+          int numOfVertices = Integer.parseInt(inputs[i]);
+          i++;
+          int numOfEdges = Integer.parseInt(inputs[i]);
+          
+          int[][] graph = new int[numOfVertices][numOfVertices];
+          if (currentType.equals("Integer")) {
+            int[] edgesArray = new int[numOfEdges*2];
+            for ( int j = 1 ; j <= numOfEdges*2 ; j++) {
+              edgesArray[j-1] = Integer.parseInt(inputs[i+j]);
+            }
+            addEdges(edgesArray, numOfEdges, graph);
+            
+            newInputPara.InputPara.add(graph);
+          }
+                    
+          i += numOfEdges*2+1; // remember i++?
+        }
         /*
         else if (currentPara == Parameter.GRAPH) {
           int numOfVertices = Integer.parseInt(inputs[i]);
@@ -232,5 +248,19 @@ public class GeeksForGeeks {
 		}
 		return i;
 	}
+
+  // In edgesArray, odd elements is from, even elements is to
+  public static void addEdges(int[] edgesArray, int numOfEdges, int[][] graph) {
+    if (edgesArray == null || edgesArray.length <= 0 || graph == null || graph.length <= 0 || graph[0].length <= 0
+        || numOfEdges <= 0)
+      return;
+
+    for (int i = 0; i < numOfEdges * 2 && i < edgesArray.length; i = i + 2) {
+      int from = edgesArray[i] - 1;
+      int to = edgesArray[i + 1] - 1;
+      graph[from][to] = 1;
+      graph[to][from] = 1;
+    }
+  }
   
 }

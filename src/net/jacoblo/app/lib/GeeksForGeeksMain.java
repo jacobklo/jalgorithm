@@ -11,6 +11,8 @@ import static net.jacoblo.algorithm.DynamicProgramming.LongestIncreasingSubseque
 import static net.jacoblo.algorithm.DynamicProgramming.PathInMatrix.largestSumPathInMatrixDP;
 import static net.jacoblo.algorithm.Backtracking.Sudoku.solveSudoku;
 import static net.jacoblo.algorithm.Backtracking.Sudoku.printSudokuArray;
+
+import net.jacoblo.algorithm.Graph.HamiltonianPath;
 import net.jacoblo.algorithm.Graph.MColoringProblem;
 import net.jacoblo.algorithm.array.LocksAndKeys;
 
@@ -32,7 +34,7 @@ public class GeeksForGeeksMain {
 //    System.out.println(testArray());
 //    testMatrix();
 //    System.out.println(test2Cases());
-    System.out.println(testArray());
+    System.out.println(testGraphMatrix());
   }
 	
 	private static String testTicTacToe() {
@@ -105,6 +107,21 @@ public class GeeksForGeeksMain {
 	      output += Integer.toString(result) + "\n";
 	    }
 	    return output;
+	}
+	
+	private static String testGraphMatrix() {
+	  Parameter[] para = { Parameter.GRAPH };
+    String[] types = { "Integer" };
+    String[] inputs = getInputs(para);
+    Case[] testCases = calc(inputs, para, types);
+    
+    String output = "";
+    for (Case c : testCases) {
+      int[][] graph = (int[][]) c.get(0);
+      boolean result = HamiltonianPath.hasHamiltonianPath(graph);
+      output += (result ? 1 : 0 )+ "\n";
+    }
+    return output;
 	}
 	
 	private static String testGraph() {
