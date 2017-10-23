@@ -8,7 +8,7 @@ import net.jacoblo.lib.Util;
 public class Subsets {
   public static void main(String[] args) {
     int[] set = { 1,2,2};
-    ArrayList<ArrayList<Integer>> result = subsets(set);
+    ArrayList<ArrayList<Integer>> result = subsetsByBitset(set);
     System.out.println(Util.<Integer>printResult(result));
   }
   
@@ -19,7 +19,40 @@ public class Subsets {
     
     return subsets(set,set.length-1);
   }
-  // TODO : This is a dump way to do, using bitset is faster
+  
+  // This is a dump way to do, using bitset is faster
+  public static ArrayList<ArrayList<Integer>> subsetsByBitset(int[] set) {
+    if ( set == null || set.length <= 0 ) return new ArrayList<>();
+    
+    ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+    for ( int i = 0 ; i < Math.pow(2,set.length) ; i++ ) {
+      char[] bitsets = toBinaryString(i, set.length).toCharArray();
+      ArrayList<Integer> currentSet = new ArrayList<>();
+      for ( int j = 0 ; j < set.length ; j++ ) {
+        if (j < bitsets.length && bitsets[j] == '1') {
+          currentSet.add(set[j]);
+        }
+      }
+      // TODO : use hashtable
+      if (!contains(result, currentSet)) {
+        result.add(currentSet);
+      }
+    }
+    
+    return result;
+  }
+  
+  private static String toBinaryString(int n, int size) {
+    if (n < 0 ) return "";
+    String numString = Integer.toBinaryString(n);
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0 ; i < (size - numString.length() ); i++ ) {
+      sb.append("0");
+    }
+    sb.append(numString);
+    return sb.toString();    
+  }
+  
   public static ArrayList<ArrayList<Integer>> subsets(int[] set, int curIndex) {
     
     if (curIndex < 0 || set == null || set.length <= 0) return new ArrayList<>();
@@ -68,6 +101,11 @@ public class Subsets {
     
     for (int each : a1) {
       if (!contains(a2,each)) {
+        return false;
+      }
+    }
+    for (int each : a2) {
+      if (!contains(a1,each)) {
         return false;
       }
     }
