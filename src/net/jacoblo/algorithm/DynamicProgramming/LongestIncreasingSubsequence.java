@@ -35,7 +35,7 @@ public class LongestIncreasingSubsequence {
 	  
 	  int[] a = { 10, 22, 9, 33, 21, 50, 41, 60, 80 };
 	  int[] b = {50, 3, 10, 7, 40, 80};
-	  int result = LongestIncreasingSubsequenceDP(b, b.length);
+	  int result = longestIncreasingSubsequenceNaiveDP2(b, b.length-1);
 	  System.out.println(result);
 		
 	}
@@ -71,6 +71,30 @@ public class LongestIncreasingSubsequence {
      return max_ending_here;
 	}
 	
+	public static int longestIncreasingSubsequenceNaiveDP2(int[] array, int currentIndex) {
+	  if (array == null || array.length <= 0 ) return Integer.MIN_VALUE;
+	  
+	  if (currentIndex == 0 ) {
+	    return 1;
+	  }
+	  
+	  int maxSubsqSofar = 0;
+	  // Need to loop through all element before, to see what is the possible max a that time. 
+	  //For example, at index 2 pf {50, 3, 10, 7, 40, 80}, the LIS should be 2. if we don't count 50. How? loop from begin again.
+	  for ( int i = 0 ; i < currentIndex ; i++ ) {
+	    int record = longestIncreasingSubsequenceNaiveDP2(array,i);
+	    if (maxSubsqSofar < record) {
+	      maxSubsqSofar = record;
+	    }
+	  }
+	  
+	  if (array[currentIndex] > array[currentIndex - 1]) {
+	    maxSubsqSofar++;
+	  }
+	  
+	  return maxSubsqSofar;
+	}
+	
 	public static int LongestIncreasingSubsequenceDP(int[] array, int n) {
 		if ( array == null) return 0;
 		
@@ -97,52 +121,6 @@ public class LongestIncreasingSubsequence {
 		}
 		return max;
 	}
-	/**
-	 * ERROR, wrong corner cases!!!
-	 * Check with {50, 3, 10, 7, 40, 80}
-	 */
-	/*
-	 * This is not LIS!! Because it will return 50, 10, 40, 80!!
-	public static ArrayList<Integer> LongestIncreasingSubsequence(int[] array) {
-	  if (array == null) return new ArrayList<>();
-	  
-	  ArrayList<Integer> result = new ArrayList<>();
-	  result.add(array[0]);
-	  for (int i = 1 ; i < array.length ; i++) {
-	    if (result.get(result.size()-1) < array[i]) {
-	      result.add(array[i]);
-	    }
-	  }
-	  
-	  return result;
-	}
-	
-	// BackTracking , naive approach, Big O(n)
-	public static ArrayList<Integer> LongestIncreasingSubsequenceBackTracking(int[] array, int currentIndex ) {
-		// careful check
-	  if (array == null) return new ArrayList<>();
-	  
-	  // Base case for recursive call, if first element call, of course it is the longest increasing subsequence so far.
-	  if (currentIndex == 0) {
-	  	ArrayList<Integer> result = new ArrayList<>();
-	  	result.add(array[0]);
-	  	return result;
-	  }
-	  
-	  // BackTracking, assume this program is perfected to find LIS, then we should be able to get the result of the subsequence so far, from index 0 to currentIndex-1
-	  ArrayList<Integer> result = LongestIncreasingSubsequenceBackTracking(array, currentIndex-1);
-	  
-	  // Calculate if this currentIndex can be the new LIS, two case: 
-	  // 1) this element array[currentIndex] can form a even better LIS
-	  if (array[currentIndex] > array[currentIndex-1]) {
-	  	result.add(array[currentIndex]);
-	  }
-	  // 2) No, this element cannot form a even better LIS
-	  else {}
-	  
-	  return result;
-	}
-	*/
 	
 
 }
