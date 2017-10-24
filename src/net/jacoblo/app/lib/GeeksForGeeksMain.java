@@ -210,20 +210,20 @@ public class GeeksForGeeksMain {
     return outputs;
 	}
 
-	private static String testArray() {
-		
+  private static String testArray() {
+
     Parameter[] para = { Parameter.ARRAY };
-    String[] types = { "Character" };
-	  String[] inputs = getInputs(para);
-	  Case[] testCases = calc(inputs, para, types);
-    
+    String[] types = { "Integer" };
+    String[] inputs = getInputs(para);
+    Case[] testCases = calc(inputs, para, types);
+
     String outputs = "";
-    for ( Case c : testCases) {
-      char[] locks = (char[])c.get(0);
-      char[] keys = (char[])c.get(1);
-      char[] result = LocksAndKeys.locksAndKeys(locks,keys);
-      outputs += LocksAndKeys.printLocks(result) + "\n";
+    for (Case c : testCases) {
+      int[] array = (int[]) c.get(0);
+      int result = kadane(array);
+      outputs += Integer.toString(result) + "\n";
     }
-		return outputs;
-	}
+    return outputs;
+  }
+
 }
