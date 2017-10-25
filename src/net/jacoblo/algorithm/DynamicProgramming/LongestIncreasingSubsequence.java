@@ -35,7 +35,8 @@ public class LongestIncreasingSubsequence {
 	  
 	  int[] a = { 10, 22, 9, 33, 21, 50, 41, 60, 80 };
 	  int[] b = {50, 3, 10, 7, 40, 80};
-	  int result = longestIncreasingSubsequenceNaiveDP2(b, b.length-1);
+	  int[] c = { 0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15 };
+	  int result = longestIncreasingSubsequenceNaiveDP2(c, c.length-1);
 	  System.out.println(result);
 		
 	}
@@ -83,16 +84,41 @@ public class LongestIncreasingSubsequence {
 	  //For example, at index 2 pf {50, 3, 10, 7, 40, 80}, the LIS should be 2. if we don't count 50. How? loop from begin again.
 	  for ( int i = 0 ; i < currentIndex ; i++ ) {
 	    int record = longestIncreasingSubsequenceNaiveDP2(array,i);
+	    
+	    if (array[currentIndex] > array[currentIndex - 1]) {
+		    maxSubsqSofar++;
+		  }
 	    if (maxSubsqSofar < record) {
 	      maxSubsqSofar = record;
 	    }
 	  }
 	  
-	  if (array[currentIndex] > array[currentIndex - 1]) {
-	    maxSubsqSofar++;
-	  }
+	  
 	  
 	  return maxSubsqSofar;
+	}
+	
+	public static int longestIncreasingSubsequenceDP2(int[] array) {
+		if ( array == null || array.length <= 0 ) return Integer.MIN_VALUE;
+		
+		int[] LISs = new int[array.length];
+		LISs[0] = 1;
+		
+		for ( int i = 1; i < array.length ; i++ ) {
+			int maxSubsqSoFar = 0;
+			for ( int j = 0 ; j < i ; j++ ) {
+				int record = LISs[j];
+				if (maxSubsqSoFar < record) {
+					maxSubsqSoFar = record;
+				}
+			}
+			if ( array[i] > array[i-1]) {
+				maxSubsqSoFar++;
+			}
+			LISs[i] = maxSubsqSoFar;
+		}
+		
+		return LISs[array.length-1];
 	}
 	
 	public static int LongestIncreasingSubsequenceDP(int[] array, int n) {
