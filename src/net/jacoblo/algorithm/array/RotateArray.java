@@ -44,13 +44,30 @@ public class RotateArray {
         a[a_i] = in.nextInt();
     }
     
-    int[] result = calcRotations(a,k);
+    int[] result = calcRotationsv2(a,k);
     
     for ( int i = 0 ; i < result.length ; i++ ) {
         System.out.print(result[i] + " ");
     }
-}
+  }
+  
+  // Space Complexity : O(1) 
+  private static int[] calcRotationsv2(int[] orig, int numOfRotations) {
+    if (orig == null || orig.length <= 0 || numOfRotations < 0) return new int[0];
+    
+    int temp = orig[0];
+    
+    for (int i = 0 ; i < orig.length ; i++) {
+      int nextPos = calcLeftPos(i,numOfRotations,orig.length);
+      int storage = orig[nextPos];
+      orig[nextPos] = temp;
+      temp = storage;
+    }
+    
+    return orig;
+  }
 
+  //Space Complexity : O(n) 
   private static int[] calcRotations(int[] orig, int numOfRotations) {
     if (orig == null || orig.length <= 0 || numOfRotations < 0) return new int[0];
     
