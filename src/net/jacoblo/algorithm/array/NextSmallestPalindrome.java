@@ -35,7 +35,7 @@ public class NextSmallestPalindrome {
 		int[][] checks= { { 7, 4, 3, 3, 5, 4, 3, 2, 5, 7, 7, 3, 6, 5, 7, 3, 7, 2, 7, 3, 7, 5, 6, 3, 7, 7, 5, 2, 3, 4, 5, 3, 3, 4, 7 }
 											,{ 9, 4, 1, 8, 8, 0, 8, 8, 1, 4, 9 } , { 1, 3, 3, 1 } , { 1, 2, 4, 2, 1 }};
 		
-		for (int i = 0 ; i < array.length ; i++ ) {
+		for (int i = 1 ; i < array.length ; i++ ) {
 			int[] result = nextSmallestPalindrome(array[i]);
 			if (compare(result, checks[i]) == 0) {
 				System.out.println("correct");

@@ -141,8 +141,8 @@ public class GeeksForGeeksMain {
 	}
 	
 	private static String testNumberAndString() {
-		Parameter[] para = { Parameter.NUMBER, Parameter.STRING };
-		String[] types = { "Integer", "String" };
+		Parameter[] para = { Parameter.NUMBER, Parameter.NUMBER,Parameter.STRING,Parameter.STRING };
+		String[] types = { "Integer","Integer", "String" ,"String"};
 		String[] inputs = getInputs(para);
 		Case[] testCases = calc(inputs, para, types);
 		

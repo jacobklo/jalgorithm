@@ -8,6 +8,24 @@ public class MinimumNumberOfJumps {
 	  System.out.println(result);
 	}
 	
+	// optimal sub-structure: 
+	// 1) add a new element by stepping throught, ignore this element
+	// 2) include this element, add 1 jump
+	public static int minNumOfJumpsNaiveDP(int[] array, int index ) {
+		if (array == null || array.length <= 0 || index < 0 ) return Integer.MAX_VALUE;
+		
+		int[] jumps = new int[array.length]; 
+		jumps[0] = 0;
+		
+		for ( int i = 1 ; i < array.length ; i++ ) {
+			jumps[i] = Integer.MAX_VALUE;
+			
+			for ( int j = 0 ; j < i ; j++ ) {
+				
+			}
+		}
+	}
+	
 	public static int MinimumNumberOfJumpsNaiveDP(int[] array, int index) {
 		// From : http://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/
 		if (array == null) return 0;
