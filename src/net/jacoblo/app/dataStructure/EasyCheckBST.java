@@ -53,23 +53,26 @@ public class EasyCheckBST {
   }
   
   public boolean checkBST(Node root) {
-    
+    return checkBSTHelper(root).isBST;
   }
   
-  private Result checkBST(Node root, int currentData) {
-    if ( root == null ) return new Result(false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  private Result checkBSTHelper(Node node) {
+    if ( node == null ) return new Result(false, Integer.MIN_VALUE, Integer.MAX_VALUE);
     
-    Result rLeft = checkBST(root.left, root.data);
-    Result rRight = checkBST(root.right, root.data);
+    Result rLeft = checkBSTHelper(node.left);
+    Result rRight = checkBSTHelper(node.right);
     
+    if ( rLeft.isBST && rLeft.maxValueInBST >= node.data ) {
+      return new Result(false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
     
+    if ( rRight.isBST && rRight.minValueInBST <= node.data ) {
+      return new Result(false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
     
+    int newMinValue = ( node.left == null ? node.data : rLeft.minValueInBST );
+    int newMaxValue = ( node.right == null ? node.data : rRight.maxValueInBST );
+    return new Result ( true, newMinValue, newMaxValue );
   }
   
-  public int compare(Node a, Node b) {
-    if (b == null ) return Integer.MIN_VALUE;
-    if (a == null ) return Integer.MAX_VALUE;
-    
-    return b.data - a.data;
-  }
 }
