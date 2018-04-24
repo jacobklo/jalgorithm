@@ -1,5 +1,5 @@
 /*
- * EASY
+ * Medium
  * 
  * https://www.hackerrank.com/challenges/ctci-is-binary-search-tree/problem
  * 
@@ -25,22 +25,42 @@ Explanation
 The tree in the diagram satisfies the ordering property for a Binary Search Tree, so we print Yes.
 
  */
-package net.jacoblo.app.dataStructure;
+package net.jacoblo.algorithm.Sorting;
 
-public class EasyCheckBST {
+public class MediumCheckBST {
   
-  
+  public static void main(String[] args) {
+    Node n1 = new Node(1,null,null);
+    Node n3 = new Node(2,null,null);
+    Node n2 = new Node(2, n1, n3);
+    
+    Node n7 = new Node(7,null,null);
+    Node n10 = new Node(10,null,null);
+    Node n8 = new Node(8, n7, n10);
+    
+    Node n6 = new Node(6, n2, n8);
+    
+    MediumCheckBST e = new MediumCheckBST();
+    Result result = e.checkBSTHelper(n6);
+    System.out.println(result.isBST);
+  }
   /* Hidden stub code will pass a root argument to the function below. Complete the function to solve the challenge. Hint: you may want to write one or more helper functions.  
 
   The Node class is defined as follows:
   */
-  private class Node {
+  private static class Node {
     int data;
     Node left;
     Node right;
+    
+    public Node(int d, Node l, Node r) {
+      data = d;
+      left = l;
+      right = r;
+    }
  }
   
-  private class Result {
+  private static class Result {
     boolean isBST;
     int minValueInBST;
     int maxValueInBST;
@@ -62,11 +82,9 @@ public class EasyCheckBST {
     Result rLeft = checkBSTHelper(node.left);
     Result rRight = checkBSTHelper(node.right);
     
-    if ( rLeft.isBST && rLeft.maxValueInBST >= node.data ) {
-      return new Result(false, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    }
-    
-    if ( rRight.isBST && rRight.minValueInBST <= node.data ) {
+    if ( rLeft.isBST && rLeft.maxValueInBST >= node.data ||
+        rRight.isBST && rRight.minValueInBST <= node.data ||
+        node.left != null && !rLeft.isBST || node.right != null && !rRight.isBST ) {
       return new Result(false, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
     
