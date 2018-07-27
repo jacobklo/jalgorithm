@@ -1,5 +1,8 @@
 package net.jacoblo.algorithm.DynamicProgramming;
 
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 import net.jacoblo.lib.Util;
 
 public class LongestCommonSubsequence {
@@ -8,20 +11,55 @@ public class LongestCommonSubsequence {
 		String s2 = "AEDFHR";
 		String s3 = "AGGTAB";
 		String s4 = "GXTXAYB";
+    String s5 = "A";
+    String s6 = "AAAAAB";
 		
-//		int result = LongestCommonSubsequenceNaiveDP(s1,s2,s1.length(), s2.length());
-		int result3 = LongestCommonSubsequenceDP(s1,s2);
-		System.out.println(result3);
-//		int result2 = LongestCommonSubsequenceNaiveDP(s3,s4,s3.length(), s4.length());
-		int result4 = LongestCommonSubsequenceDP(s3,s4);
-		System.out.println(result4);
-		
+//  int result = LongestCommonSubsequenceNaiveDP(s1,s2,s1.length(), s2.length());
+  int result1 = LongestCommonSubsequenceDP2(s1,s2 );
+  int r1 = LongestCommonSubsequenceDP(s1,s2 );
+  
+  System.out.println(result1 + " " + r1);
+  
+//int result = LongestCommonSubsequenceNaiveDP(s1,s2,s1.length(), s2.length());
+int result2 = LongestCommonSubsequenceDP2(s3,s4 );
+int r2 = LongestCommonSubsequenceDP(s3,s4 );
+System.out.println(result2 + " " + r2);
+
+//  int result = LongestCommonSubsequenceNaiveDP(s1,s2,s1.length(), s2.length());
+  int result3 = LongestCommonSubsequenceDP2(s5,s6 );
+  int r3 = LongestCommonSubsequenceDP(s5,s6 );
+  System.out.println(result3 + " " + r3);
 //		A B C D G H _
 //		A E _ D F H R
 		
 //		A G G T _ A _ B
 //		_ G X T X A _ B
 		
+		
+	}
+	
+	public static int LongestCommonSubsequenceDP2(String s1, String s2 ) {
+	  if (s1 == null || s2 == null || s1.length() <= 0 || s2.length() <= 0 ) return 0;
+	  
+	  int[][] calc = new int[s1.length()+1][s2.length()+1];
+	  
+	  for (int i = 1 ; i < calc.length ; i++ ) {
+      for ( int j = 1 ; j < calc[i].length ; j++ ) {
+        
+        int bothHasLetter = calc[i-1][j-1];
+        if ( s1.charAt(i-1) != s2.charAt(j-1) ) {
+          bothHasLetter++;
+        }
+        
+        int s1LetterEmpty = calc[i-1][j] + 1;
+        
+        int s2LetterEmpty = calc[i][j-1] + 1;
+        
+        calc[i][j] = Util.<Integer>min(bothHasLetter, s1LetterEmpty, s2LetterEmpty);
+      }
+    }
+	  
+	  return calc[s1.length()][s2.length()];
 	}
 	
 	public static int LongestCommonSubsequenceNaiveDP(String s1, String s2, int currentIndex1, int currentIndex2) {

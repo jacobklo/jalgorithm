@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.jacoblo.data.KnapsackItem;
 
 public class Knapsack {
+  
   public static ArrayList<KnapsackItem> knapsack(ArrayList<KnapsackItem> items, int maxWeightAllow) {
     if (items == null) return new ArrayList<>();
     // Double array[items.size()][weight] = value to calculate
