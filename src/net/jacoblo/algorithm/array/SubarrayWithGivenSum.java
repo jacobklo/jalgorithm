@@ -57,7 +57,7 @@ public class SubarrayWithGivenSum {
    * s2 : 1000
    * r2 : [-1, -1]
    * 
-   * s3 : 2
+   * s3 : 2k
    * r3 : [2, 2]
    * 
    * s4 : 3
