@@ -27,6 +27,7 @@ import static net.jacoblo.lib.GeeksForGeeks.calc;
 import static net.jacoblo.algorithm.array.Rotate2DArray.rotate2DArray90DegreeInPlace;
 import static net.jacoblo.algorithm.array.Rotate2DArray.printMatrix;
 import static net.jacoblo.algorithm.DynamicProgramming.RegionsInMatrix.largestRegionInMatrix;
+import static net.jacoblo.algorithm.DynamicProgramming.MaxSubarrayProblem.kadane;
 import net.jacoblo.lib.Util;
 
 public class GeeksForGeeksMain {

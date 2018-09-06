@@ -1,6 +1,6 @@
 package net.jacoblo.dataStructure.UnionFind;
 
-import net.jacoblo.dataStructure.UnionFind.UnionFind.UnionFindable;
+import net.jacoblo.dataStructure.UnionFind.UnionFindable;
 
 public class UnionFind {
 	

@@ -45,7 +45,7 @@ public class StringFormationFromSubstring {
 	
 	// TODO
 	public static boolean canFormBySubstringKMP(String input) {
-		
+		return false;
 	}
 	
 	public static boolean canFormBySubstringBruceForce(String input) {

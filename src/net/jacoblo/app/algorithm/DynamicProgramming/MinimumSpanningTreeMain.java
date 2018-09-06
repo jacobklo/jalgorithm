@@ -3,7 +3,7 @@ package net.jacoblo.app.algorithm.DynamicProgramming;
 import net.jacoblo.algorithm.Graph.Kruskal;
 import net.jacoblo.algorithm.Graph.Prim;
 import net.jacoblo.dataStructure.UnionFind.UnionFind;
-import net.jacoblo.dataStructure.UnionFind.UnionFind.UnionFindVertex;
+import net.jacoblo.dataStructure.UnionFind.UnionFindVertex;
 import net.jacoblo.dataStructure.graph.UndirectedGraph;
 import net.jacoblo.dataStructure.graph.Edge.VisitEdge;
 import net.jacoblo.dataStructure.graph.Vertex.BasicVertex;

@@ -24,6 +24,8 @@ public class MinimumNumberOfJumps {
 				
 			}
 		}
+
+		return Integer.MIN_VALUE;
 	}
 	
 	public static int MinimumNumberOfJumpsNaiveDP(int[] array, int index) {

@@ -22,7 +22,7 @@ public class KnapsackMain {
     ArrayList<KnapsackItem> resultValue = Knapsack.knapsack(items, 6);
     System.out.println(resultValue);
     
-    double result2 = Knapsack.knapsack2(items, 6);
-    System.out.println(result2);
+//    double result2 = Knapsack.knapsack2(items, 6);
+//    System.out.println(result2);
   }
 }
