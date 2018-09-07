@@ -69,7 +69,7 @@ import java.util.Scanner;
 public class CountLuck {
 //Complete the countLuck function below.
   static String countLuck(String[] matrix, int k) {
-
+    return "";
   }
 
   private static final Scanner scanner = new Scanner(System.in);

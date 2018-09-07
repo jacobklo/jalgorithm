@@ -64,7 +64,7 @@ Optimal distribution will be .
 public class Candies {
 //Complete the candies function below.
   static long candies(int n, int[] arr) {
-
+    return 0;
 
   }
 

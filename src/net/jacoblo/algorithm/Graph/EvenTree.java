@@ -58,6 +58,7 @@ No more edges can be removed.
  */
 package net.jacoblo.algorithm.Graph;
 
+/*
 public class EvenTree {
 //Complete the evenForest function below.
   static int evenForest(int t_nodes, int t_edges, List<Integer> t_from, List<Integer> t_to) {
@@ -97,3 +98,4 @@ public class EvenTree {
       bufferedWriter.close();
   }
 }
+*/
