@@ -40,9 +40,6 @@ In second test case, sum of elements from 1st position to 5th position is 15
 
  */
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
 
 public class SubarrayWithGivenSum {
 	
@@ -113,7 +110,8 @@ public class SubarrayWithGivenSum {
   }
   
   private int[] array1 = { 1, 2, 3, 4 };
-  
+
+  /*
   @Test
 	public void testNormal() {
 		int sum = 1;
@@ -139,4 +137,5 @@ public class SubarrayWithGivenSum {
 		int[] expected = { -1, -1 };
 		assertArrayEquals(expected, result);
   }
+  */
 }
