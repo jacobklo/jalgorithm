@@ -2,12 +2,19 @@ package net.jacoblo.dataStructure;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.codehaus.groovy.classgen.asm.BinaryDoubleExpressionHelper;
 import org.junit.jupiter.api.Test;
 
 public class BinarySearchTreeTest {
 
   // Methods that do not use from BinarySearchTree class
   /*
+// TODO : use swap Node to swap all pointer, instead of just changing the key
+  private void swapValue(Node a, Node b ) {
+    int tmpKey = a.m_Key;
+    a.m_Key = b.m_Key;
+    b.m_Key = tmpKey;
+  }
 
   public Node contains(Node n, int key) {
     if ( n == null ) return null;
@@ -171,6 +178,31 @@ public class BinarySearchTreeTest {
     assertEquals("{ 3-1 2-2 1-3 0-4 2-5 1-6 2-7 }", bst.toString());
   }
 
+
+  private BinarySearchTree genBalancedTree3Level() {
+    BinarySearchTree bst = new BinarySearchTree();
+    bst.put(8);
+    bst.put(4);
+    bst.put(2);
+    bst.put(1);
+    bst.put(3);
+    bst.put(6);
+    bst.put(7);
+    bst.put(12);
+    bst.put(10);
+    bst.put(9);
+    bst.put(14);
+    bst.put(13);
+    bst.put(15);
+    return bst;
+  }
+
+  @Test
+  void testBalancedTree3Level() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+  }
+
   @Test
   void testEmptyRemove() {
     BinarySearchTree bst = new BinarySearchTree();
@@ -179,10 +211,66 @@ public class BinarySearchTreeTest {
   }
 
   @Test
-  void testOneAndRemove() {
+  void testRemoveNoChild() {
     BinarySearchTree bst = new BinarySearchTree();
     bst.put(1);
     bst.remove( 1 );
     assertEquals("{ }", bst.toString());
+  }
+
+  @Test
+  void testRemoveNoChild2() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(1);
+    assertEquals("{ 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+  }
+
+  @Test
+  void testRemoveNoChild3() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(3);
+    assertEquals("{ 3-1 2-2 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+  }
+
+  @Test
+  void testRemoveOneNodeWithOneChild() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(10);
+    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-8 2-9 1-12 3-13 2-14 3-15 }", bst.toString());
+  }
+
+  @Test
+  void testRemoveOneNodeWithOneChild2() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(6);
+    assertEquals("{ 3-1 2-2 3-3 1-4 2-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+  }
+
+  @Test
+  void testRemoveOneNodeWithTwoChildren() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(2);
+    assertEquals("{ 3-1 2-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+  }
+
+  @Test
+  void testRemoveOneNodeWithTwoChildren2() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(4);
+    assertEquals("{ 3-1 2-2 3-3 1-6 2-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+  }
+
+  @Test
+  void testRemoveOneNodeWithTwoChildren3() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(14);
+    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-15 }", bst.toString());
+  }
+
+  @Test
+  void testRemoveRoot() {
+    BinarySearchTree bst = genBalancedTree3Level();
+    bst.remove(8);
+    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
   }
 }
