@@ -1,7 +1,10 @@
 package jacoblo.dataStructure;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public class BinarySearchTree {
-  private Node m_Root;
+  public Node m_Root;
 
   public BinarySearchTree() {}
 
@@ -77,7 +80,7 @@ public class BinarySearchTree {
     return n;
   }
 
-  // TODO : maybe use recursive?
+  // O(log n) implementation
   public Node higherEntry(Node n) {
     if ( n == null ) return null;
     Node current = n;
@@ -105,7 +108,15 @@ public class BinarySearchTree {
     return null;
   }
 
-  private static class Node {
+  // REMEMBER : Arrays.stream, IntSteam.concat, Stream.toArray
+  public Node[] toArray(Node n) {
+    if ( n == null ) return new Node[0];
+    Stream<Node> left = Arrays.stream(toArray(n.m_Left));
+    Stream<Node> right = Arrays.stream(toArray(n.m_Right));
+    return Stream.concat(left, Stream.concat(Stream.of(n), right) ).toArray(Node[]::new);
+  }
+
+  public static class Node {
     public int m_Key;
     public Node m_Left, m_Right, m_Parent;
     public int m_Level;
@@ -126,5 +137,5 @@ public class BinarySearchTree {
   }
 
   @Override
-  public String toString() { return "{ " + (m_Root != null ? m_Root.toString() : "" ) + "}"; }
+  public String toString() { return m_Root.toString(); }
 }

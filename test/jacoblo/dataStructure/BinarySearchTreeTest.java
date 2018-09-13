@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class BinarySearchTreeTest {
 
   // Methods that do not use from BinarySearchTree class
@@ -53,119 +58,123 @@ public class BinarySearchTreeTest {
 
 
    */
+
+  private class BinarySearchTreeClass extends BinarySearchTreeSimplify {}
+//  private class BinarySearchTreeClass extends BinarySearchTree {}
+
   @Test
   void testEmpty() {
-    BinarySearchTree bst = new BinarySearchTree();
-    assertEquals("{ }", bst.toString());
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
+    assertEquals(null, bst.m_Root);
   }
 
   @Test
   void testOne() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(1);
-    assertEquals("{ 0-1 }", bst.toString());
+    assertEquals("0-1 ", bst.toString());
   }
 
   @Test
   void testOneMulti() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(1);
     bst.put( 1 );
-    assertEquals("{ 0-1 }", bst.toString());
+    assertEquals("0-1 ", bst.toString());
   }
 
   @Test
   void testTwo() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(1);
     bst.put( 2 );
-    assertEquals("{ 0-1 1-2 }", bst.toString());
+    assertEquals("0-1 1-2 ", bst.toString());
   }
 
   @Test
   void testTwoV2() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(2);
     bst.put( 1 );
-    assertEquals("{ 1-1 0-2 }", bst.toString());
+    assertEquals("1-1 0-2 ", bst.toString());
   }
 
   @Test
   void testTwoMulti() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(2);
     bst.put(2);
     bst.put( 1 );
     bst.put( 1 );
-    assertEquals("{ 1-1 0-2 }", bst.toString());
+    assertEquals("1-1 0-2 ", bst.toString());
   }
 
   @Test
   void testThree() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(1);
     bst.put(2);
     bst.put(3);
-    assertEquals("{ 0-1 1-2 2-3 }", bst.toString());
+    assertEquals("0-1 1-2 2-3 ", bst.toString());
   }
 
   @Test
   void testThreeV2() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(3);
     bst.put(2);
     bst.put(1);
-    assertEquals("{ 2-1 1-2 0-3 }", bst.toString());
+    assertEquals("2-1 1-2 0-3 ", bst.toString());
   }
 
   @Test
   void testThreeV3() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(2);
     bst.put(3);
     bst.put(1);
-    assertEquals("{ 1-1 0-2 1-3 }", bst.toString());
+    assertEquals("1-1 0-2 1-3 ", bst.toString());
   }
 
   @Test
   void testThreeV4() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(2);
     bst.put(1);
     bst.put(3);
-    assertEquals("{ 1-1 0-2 1-3 }", bst.toString());
+    assertEquals("1-1 0-2 1-3 ", bst.toString());
   }
 
   @Test
   void testThreeV5() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(1);
     bst.put(3);
     bst.put(2);
-    assertEquals("{ 0-1 2-2 1-3 }", bst.toString());
+    assertEquals("0-1 2-2 1-3 ", bst.toString());
   }
 
   @Test
   void testSevenUnbalanced() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     for (int i = 1; i <= 7 ; i++ ) {
       bst.put( i );
     }
-    assertEquals("{ 0-1 1-2 2-3 3-4 4-5 5-6 6-7 }", bst.toString());
+    assertEquals("0-1 1-2 2-3 3-4 4-5 5-6 6-7 ", bst.toString());
   }
 
   @Test
   void testSevenUnbalancedReverse() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     for (int i = 7; i > 0 ; i-- ) {
       bst.put( i );
     }
-    assertEquals("{ 6-1 5-2 4-3 3-4 2-5 1-6 0-7 }", bst.toString());
+    assertEquals("6-1 5-2 4-3 3-4 2-5 1-6 0-7 ", bst.toString());
   }
 
   @Test
   void testSevenUnbalancedV2() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(4);
     bst.put(3);
     bst.put(2);
@@ -174,12 +183,12 @@ public class BinarySearchTreeTest {
     bst.put(5);
     bst.put(7);
 
-    assertEquals("{ 3-1 2-2 1-3 0-4 2-5 1-6 2-7 }", bst.toString());
+    assertEquals("3-1 2-2 1-3 0-4 2-5 1-6 2-7 ", bst.toString());
   }
 
 
-  private BinarySearchTree genBalancedTree3Level() {
-    BinarySearchTree bst = new BinarySearchTree();
+  private BinarySearchTreeClass genBalancedTree3Level() {
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(8);
     bst.put(4);
     bst.put(2);
@@ -198,78 +207,88 @@ public class BinarySearchTreeTest {
 
   @Test
   void testBalancedTree3Level() {
-    BinarySearchTree bst = genBalancedTree3Level();
-    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+    BinarySearchTreeClass bst = genBalancedTree3Level();
+    assertEquals("3-1 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 ", bst.toString());
   }
 
   @Test
   void testEmptyRemove() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.remove(1);
-    assertEquals("{ }", bst.toString());
+    assertEquals(null, bst.m_Root);
   }
 
   @Test
   void testRemoveNoChild() {
-    BinarySearchTree bst = new BinarySearchTree();
+    BinarySearchTreeClass bst = new BinarySearchTreeClass();
     bst.put(1);
     bst.remove( 1 );
-    assertEquals("{ }", bst.toString());
+    assertEquals(null, bst.m_Root);
   }
 
   @Test
   void testRemoveNoChild2() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(1);
-    assertEquals("{ 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+    assertEquals("2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 ", bst.toString());
   }
 
   @Test
   void testRemoveNoChild3() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(3);
-    assertEquals("{ 3-1 2-2 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+    assertEquals("3-1 2-2 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 ", bst.toString());
   }
 
   @Test
   void testRemoveOneNodeWithOneChild() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(10);
-    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-8 2-9 1-12 3-13 2-14 3-15 }", bst.toString());
+    assertEquals("3-1 2-2 3-3 1-4 2-6 3-7 0-8 2-9 1-12 3-13 2-14 3-15 ", bst.toString());
   }
 
   @Test
   void testRemoveOneNodeWithOneChild2() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(6);
-    assertEquals("{ 3-1 2-2 3-3 1-4 2-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+    assertEquals("3-1 2-2 3-3 1-4 2-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 ", bst.toString());
   }
 
   @Test
   void testRemoveOneNodeWithTwoChildren() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(2);
-    assertEquals("{ 3-1 2-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+    assertEquals("3-1 2-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 ", bst.toString());
   }
 
   @Test
   void testRemoveOneNodeWithTwoChildren2() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(4);
-    assertEquals("{ 3-1 2-2 3-3 1-6 2-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+    assertEquals("3-1 2-2 3-3 1-6 2-7 0-8 3-9 2-10 1-12 3-13 2-14 3-15 ", bst.toString());
   }
 
   @Test
   void testRemoveOneNodeWithTwoChildren3() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(14);
-    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-15 }", bst.toString());
+    assertEquals("3-1 2-2 3-3 1-4 2-6 3-7 0-8 3-9 2-10 1-12 3-13 2-15 ", bst.toString());
   }
 
   @Test
   void testRemoveRoot() {
-    BinarySearchTree bst = genBalancedTree3Level();
+    BinarySearchTreeClass bst = genBalancedTree3Level();
     bst.remove(8);
-    assertEquals("{ 3-1 2-2 3-3 1-4 2-6 3-7 0-9 2-10 1-12 3-13 2-14 3-15 }", bst.toString());
+    assertEquals("3-1 2-2 3-3 1-4 2-6 3-7 0-9 2-10 1-12 3-13 2-14 3-15 ", bst.toString());
+  }
+
+  // REMEMBER : stream.collect, stream.map
+  @Test
+  void testToArray() {
+    BinarySearchTreeClass bst = genBalancedTree3Level();
+    ArrayList<Integer> al = Arrays.stream(bst.toArray(bst.m_Root))
+                                  .map(node -> node.m_Key)
+                                  .collect(Collectors.toCollection(ArrayList::new));
+    assertEquals("[1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15]", al.toString());
   }
 }
